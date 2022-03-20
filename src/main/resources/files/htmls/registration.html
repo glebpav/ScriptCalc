@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration</title>
+
+    <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Varela+Round" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"></script>
+    <script src="../scripts/registration.js"></script>
+
+</head>
+<body class="mainDiv container" >
+<div align="middle" class="center" >
+    <div style="width: 500px" class="card">
+        <h1>Registration</h1>
+
+        <div style="height: 42px;" class="row">
+            <p class="block titles" style="text-align: right; width: 160px">Name</p>
+            <input id="inputName" style="width: 150px" class="block enterText"/>
+            <p style="width: 70px" class="block"></p>
+        </div>
+
+        <div style="height: 42px;" class="row">
+            <p class="block titles" style="text-align: right; width: 160px">Login</p>
+            <input id="inputLogin" style="width: 150px" class="block enterText"/>
+            <p style="width: 70px" class="block"></p>
+        </div>
+        <div style="height: 42px;" class="row">
+            <p class="block titles" style="text-align: right; width: 160px">Password</p>
+            <input id="inputPassword" type="password" style="width: 150px" class="block enterText"/>
+            <p style="width: 70px" class="block"></p>
+        </div>
+        <div style="height: 42px;" class="row">
+            <p class="block titles" style="text-align: right; width: 160px">Confirm Password</p>
+            <input id="inputPassword2" type="password" style="width: 150px" class="block enterText"/>
+            <p style="width: 70px" class="block"></p>
+        </div>
+
+        <br>
+
+        <button class="btn-grad" onclick="registerUser()">Create script</button>
+    </div>
+</div>
+<button onclick="btnBackClicked()" style="width:30px; height:30px; padding:0; cursor: pointer" class="addBtn leftTopCornered"><i class="fa fa-home"></i></button>
+</body>
+</html>

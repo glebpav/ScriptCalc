@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Make Script</title>
+
+    <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Varela+Round"/>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"></script>
+    <script src="../scripts/scriptBuilder.js"></script>
+    <script src="../scripts/home.js"></script>
+
+</head>
+<body class="mainDiv">
+<div align="middle">
+    <div class="card">
+        <h1>Make your own script</h1>
+
+        <form enctype="multipart/form-data">
+            <input id="scriptName" class="enterText" placeholder="Name of your script"/>
+            <textarea id="scriptDescription" class="enterText"
+                      placeholder="Put here your wonderful description"></textarea>
+
+            <p class="titles">Input params</p>
+
+            <div id="inputParams">
+                <div class="row" id="row0">
+                    <input class="block enterText" placeholder="Param"/>
+                    <input class="block enterText" style="width: 40px" placeholder="Units"/>
+                    <button onclick="delRow(0)" class="block delBtn">Del</button>
+                </div>
+            </div>
+            <button id="btnAddMoreInpParams" class="addBtn" onclick="addMore(&quot;inp&quot;)">Add more</button>
+
+            <p class="titles" align="middle">Output params</p>
+
+            <div id="outputParams">
+                <div class="row" id="row1">
+                    <input class="block enterText" placeholder="Param"/>
+                    <input class="block enterText" style="width: 40px" placeholder="Units"/>
+                    <button onclick="delRow(1)" class="block delBtn">Del</button>
+                </div>
+            </div>
+            <button id="btnAddMoreOutParams" class="addBtn" onclick="addMore(&quot;out&quot;)">Add more</button>
+
+            <br>
+
+            <p class="titles">Attach script.py</p>
+
+            <input type='file' id="getFile" >
+
+        </form>
+
+        <br>
+
+
+        <button class="btn-grad" onclick="onMakeScript()">Create script</button>
+
+    </div>
+</div>
+
+</body>
+</html>

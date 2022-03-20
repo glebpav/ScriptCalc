@@ -1,0 +1,228 @@
+body {
+    height: 100%;
+    min-height: 100vh;
+    position: relative;
+}
+
+.mainDiv {
+    font-family: Varela Round;
+    height: 100%;
+    color: #002148;
+    border-radius: 0px;
+    background: linear-gradient(to top left, #f64f59, #c471ed, #12c2e9);
+}
+
+.card {
+    margin-top: 10px;
+    text-align: center;
+    background: #e0e5ff;
+    width: 800px;
+    padding: 20px;
+    border-radius: 50px;
+    background: #e0e5ff;
+    box-shadow: 20px 20px 60px #bec3d9, -20px -20px 60px #ffffff;
+}
+
+input[type=file]::file-selector-button {
+    font-family: Varela Round;
+    width: 120px;
+    padding: 5px;
+    border: 0px;
+    margin: 10px;
+    color: #002148;
+    border-radius: 10px;
+    background: #e0e5ff;
+    box-shadow: 4px 4px 8px #bec3d9,
+    -4px -4px 8px #ffffff;
+}
+
+.enterText {
+    width: 70%;
+    border: 0px;
+    padding: 5px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    background: #e0e5ff;
+    text-color: #002148;
+    font-family: Varela Round;
+    box-shadow: 4px 4px 8px #bec3d9,
+    -4px -4px 8px #ffffff;
+}
+
+.enterTextDown {
+    width: 70%;
+    border: 0px;
+    padding: 5px;
+    text-align: center;
+    font-family: Varela Round;
+    text-color: #002148;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    background: #e0e5ff;
+    box-shadow: inset 2px 2px 4px #bec3d9,
+    inset -2px -2px 4px #ffffff;
+}
+
+.titles {
+    padding: 5px;
+}
+
+::placeholder { /* Most modern browsers support this now. */
+    color: #9e9e9e;
+}
+
+.row {
+    width: 100%;
+    text-align: center;
+/ / center the content of the container
+}
+
+.block {
+    width: 100px;
+    display: inline-block;
+/ / display inline with ability to provide width / height
+}
+
+.delBtn {
+    width: 60px;
+    padding: 5px;
+    border: 0px;
+    margin-bottom: 10px;
+    margin-left: 20px;
+    color: #002148;
+    font-family: Varela Round;
+    border-radius: 10px;
+    background: #ffb8cd;
+    box-shadow: 4px 4px 8px #d99cae,
+    -4px -4px 8px #ffd4ec;
+}
+
+.addBtn {
+    width: 120px;
+    padding: 5px;
+    border: 0px;
+    margin-top: 12px;
+    color: #002148;
+    cursor: pointer;
+    font-family: Varela Round;
+    border-radius: 10px;
+    background: #e0e5ff;
+    box-shadow: 4px 4px 8px #bec3d9,
+    -4px -4px 8px #ffffff;
+}
+
+.button {
+    margin-top: 30px;
+    text-decoration: none;
+    border: none;
+    font-size: 14px;
+    font-family: Varela Round;
+    color: #fff;
+    width: 9em;
+    height: 3em;
+    line-height: 2em;
+    text-align: center;
+    background: linear-gradient(90deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);
+    background-size: 300%;
+    border-radius: 30px;
+    z-index: 0;
+}
+
+.button:hover {
+    animation: ani 8s linear infinite;
+    border: none;
+}
+
+@keyframes ani {
+    0% {
+        background-position: 0%;
+    }
+
+    100% {
+        background-position: 100%;
+    }
+}
+
+.btn-grad {
+    background-image: linear-gradient(to right, #f64f59, #c471ed, #12c2e9)
+}
+
+.btn-grad {
+    width: 150px;
+    margin: 20px;
+    font-size: 14px;
+    font-family: Varela Round;
+    padding: 10px;
+    text-align: center;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;
+    border: none;
+    box-shadow: 0 0 20px #eee;
+    border-radius: 10px;
+}
+
+.btn-grad:hover {
+    background-position: right center; /* change the direction of the change here */
+    color: #fff;
+    text-decoration: none;
+}
+
+.button:before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    z-index: -1;
+    background: linear-gradient(90deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);
+    background-size: 400%;
+    border-radius: 35px;
+    transition: 1s;
+}
+
+.button:hover::before {
+    filter: blur(20px);
+}
+
+.button:active {
+    background: linear-gradient(32deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);
+}
+
+.raz p {
+    max-width: 200px; /* блок занимает ширину родителя, max-width её ограничивает */
+    min-height: 30px;
+    margin-left: auto;
+    margin-right: 0em;
+}
+
+.container {
+    position: relative;
+}
+
+.vertical-center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.leftTopCornered {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 10px;
+}
+
+
