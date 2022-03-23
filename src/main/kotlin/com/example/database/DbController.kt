@@ -1,25 +1,25 @@
 package ru.tashchyan.database
 
-import ru.tashchyan.models.User
+import com.example.models.User
 import java.sql.DriverManager
 
 object DbController {
-    private const val dbhost = "89.108.78.211"
-    private const val dbuser = "user"
-    private const val dbpass = "V2X8i6JZ"
-    private const val dbname = "termoPhysics"
+    private const val dbHost = "89.108.78.211"
+    private const val dbUser = "user"
+    private const val dbPass = "V2X8i6JZ"
+    private const val dbName = "termoPhysics"
 
-    fun createUser(login: String, password: String, name: String)  {
-        if(!(login.length in 3..30))
+    fun createUser(login: String, password: String, name: String) {
+        if (!(login.length in 3..30))
             throw Exception("Login length should be from 3 to 30 characters")
-        if(!(password.length in 3..255))
+        if (!(password.length in 3..255))
             throw Exception("Password length should be from 3 to 30 characters")
-        if(!(name.length in 3..128))
+        if (!(name.length in 3..128))
             throw Exception("Name length should be from 3 to 30 characters")
-        if(getUserByLogin(login) != null)
+        if (getUserByLogin(login) != null)
             throw Exception("User with this login has already registered")
         Class.forName("com.mysql.cj.jdbc.Driver")
-        val connection = DriverManager.getConnection("jdbc:mysql://$dbhost/$dbname", dbuser, dbpass)
+        val connection = DriverManager.getConnection("jdbc:mysql://$dbHost/$dbName", dbUser, dbPass)
         val insertAccountSql = "INSERT INTO Users (login, password, name) VALUES (?, ?, ?);"
         val queryInsertAccount = connection.prepareStatement(insertAccountSql)
         queryInsertAccount.setString(1, login)
@@ -31,7 +31,7 @@ object DbController {
 
     fun getUserByLoginAndPassword(login: String, password: String): User? {
         Class.forName("com.mysql.cj.jdbc.Driver")
-        val connection = DriverManager.getConnection("jdbc:mysql://$dbhost/$dbname", dbuser, dbpass)
+        val connection = DriverManager.getConnection("jdbc:mysql://$dbHost/$dbName", dbUser, dbPass)
         val getUsers = "SELECT * FROM Users WHERE login = ? AND password = ?;"
         val getUserQuery = connection.prepareStatement(getUsers)
         getUserQuery.setString(1, login)
@@ -51,7 +51,7 @@ object DbController {
 
     fun getUserByLogin(login: String): User? {
         Class.forName("com.mysql.cj.jdbc.Driver")
-        val connection = DriverManager.getConnection("jdbc:mysql://$dbhost/$dbname", dbuser, dbpass)
+        val connection = DriverManager.getConnection("jdbc:mysql://$dbHost/$dbName", dbUser, dbPass)
         val getUsers = "SELECT * FROM Users WHERE login = ?;"
         val getUserQuery = connection.prepareStatement(getUsers)
         getUserQuery.setString(1, login)
@@ -68,13 +68,13 @@ object DbController {
         return output
     }
 
-    fun createFile(creatorID: Int, name: String, description: String, path: String)  {
-        if(!(name.length in 3..128))
+    fun createFile(creatorID: Int, name: String, description: String, path: String) {
+        if (!(name.length in 3..128))
             throw Exception("Script name length should be from 3 to 128 characters")
-        if(!(description.length in 0..65535))
+        if (!(description.length in 0..65535))
             throw Exception("Script description length should be from 0 to 65535 characters")
         Class.forName("com.mysql.cj.jdbc.Driver")
-        val connection = DriverManager.getConnection("jdbc:mysql://$dbhost/$dbname", dbuser, dbpass)
+        val connection = DriverManager.getConnection("jdbc:mysql://$dbHost/$dbName", dbUser, dbPass)
         val insertAccountSql = "INSERT INTO Scripts (creatorID, name, description, path) VALUES (?, ?, ?, ?);"
         val queryInsertAccount = connection.prepareStatement(insertAccountSql)
         queryInsertAccount.setInt(1, creatorID)

@@ -1,6 +1,6 @@
 package ru.tashchyan
 
-import ru.tashchyan.models.User
+import com.example.models.User
 import java.util.*
 import kotlin.collections.LinkedHashSet
 

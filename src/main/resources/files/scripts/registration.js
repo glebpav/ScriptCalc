@@ -41,7 +41,7 @@ function registerUser() {
             saveUser(user)
             */
 
-            // alert(user.name + response.token);
+            alert("Successful");
         },
     });
 }

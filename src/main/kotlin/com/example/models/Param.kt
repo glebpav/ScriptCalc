@@ -1,4 +1,4 @@
-package ru.tashchyan.models
+package com.example.models
 
 import kotlinx.serialization.Serializable
 
