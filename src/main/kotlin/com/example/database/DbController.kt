@@ -1,5 +1,7 @@
 package ru.tashchyan.database
 
+import com.example.models.Param
+import com.example.models.Script
 import com.example.models.User
 import java.sql.DriverManager
 
@@ -104,5 +106,21 @@ object DbController {
         queryInsertAccount.setString(4, type)
         queryInsertAccount.execute()
         connection.close()
+    }
+
+    fun getAllScripts(): List<Script?> {
+
+        return listOf(
+            Script(
+                1, 1, "Scr1", "cool",
+                listOf(Param("p", "pa"), Param("v", "m^3")),
+                listOf(Param("T", "K"), Param("M", "kg"))
+            ),
+            Script(
+                2, 1, "Scr2", "cool2",
+                listOf(Param("p2", "pa")),
+                listOf(Param("T2", "K"))
+            )
+        )
     }
 }
