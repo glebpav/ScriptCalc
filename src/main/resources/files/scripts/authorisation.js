@@ -10,10 +10,6 @@ function loadUser() {
     return JSON.parse(localStorage.getItem("user"))
 }
 
-function loadToken() {
-    return JSON.parse(localStorage.getItem("token"))
-}
-
 function onMakeScript() {
     let name = document.getElementById("inputName").value
     let login = document.getElementById("inputLogin").value

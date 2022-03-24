@@ -68,7 +68,7 @@ object DbController {
         return output
     }
 
-    fun createFile(creatorID: Int, name: String, description: String, path: String) {
+    fun createFile(creatorID: Int, name: String, description: String, path: String): Int {
         if (!(name.length in 3..128))
             throw Exception("Script name length should be from 3 to 128 characters")
         if (!(description.length in 0..65535))
@@ -81,6 +81,27 @@ object DbController {
         queryInsertAccount.setString(2, name)
         queryInsertAccount.setString(3, description)
         queryInsertAccount.setString(4, path)
+        queryInsertAccount.execute()
+
+        val queryGetLastId = connection.createStatement();
+        val result = queryGetLastId.executeQuery("SELECT LAST_INSERT_ID();");
+        result.next()
+        val lastId = result.getInt(1)
+
+        connection.close()
+
+        return lastId
+    }
+
+    fun addParameter(scriptID: Int, name: String, unit: String, type: String) {
+        Class.forName("com.mysql.cj.jdbc.Driver")
+        val connection = DriverManager.getConnection("jdbc:mysql://$dbHost/$dbName", dbUser, dbPass)
+        val insertParamSql = "INSERT INTO Params (scriptID, name, unit, type) VALUES (?, ?, ?, ?);"
+        val queryInsertAccount = connection.prepareStatement(insertParamSql)
+        queryInsertAccount.setInt(1, scriptID)
+        queryInsertAccount.setString(2, name)
+        queryInsertAccount.setString(3, unit)
+        queryInsertAccount.setString(4, type)
         queryInsertAccount.execute()
         connection.close()
     }

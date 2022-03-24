@@ -26,9 +26,9 @@ function addMore(type) {
     newButton = document.createElement("button");
 
     newDiv.setAttribute("class", "row");
-    newDiv.setAttribute("id", "row" + countOfRows);
+    newDiv.setAttribute("id", "row" + (countOfRows + 1));
     newButton.setAttribute("class", "block delBtn");
-    newButton.setAttribute("onclick", "delRow(" + countOfRows + ")");
+    newButton.setAttribute("onclick", "delRow(" + (countOfRows + 1 )+ ")");
     newInput.setAttribute("class", "block enterText");
     newInputUnits.setAttribute("class", "block enterText");
     newInput.setAttribute("placeHolder", "Param");
@@ -54,7 +54,8 @@ function delRow(row) {
 }
 
 function onMakeScript() {
-    let outputParams = document.getElementById("outputParams").getElementsByTagName("input")
+    let form = document.getElementsByTagName("form")[0]
+    /*let outputParams = document.getElementById("outputParams").getElementsByTagName("input")
     let inputParams = document.getElementById("inputParams").getElementsByTagName("input")
     let scriptDescriptionStr = document.getElementById("scriptDescription").value;
     let scriptNameStr = document.getElementById("scriptName").value;
@@ -72,27 +73,23 @@ function onMakeScript() {
     for (let i = 0; i < outputParams.length; i += 1) {
         if (i % 2 === 0) outputParamsStr += outputParams[i].value + ","
         else outputParamsUnitsStr += outputParams[i].value + ","
-    }
+    }*/
 
-    let file = $('form')[0].files[0]; // You need to use standard javascript object here
-    let formData1 = new FormData();
-    formData1.append("file", file)
-    formData1.append("token", loadToken())
-
-    console.log(formData1)
-
-    /*
-    let formData = new FormData();
+    /*let formData = new FormData();
     formData.append('file', $("#getFile")[0].files[0]);
-    console.log(formData    )
-*/
+    console.log(formData    )*/
+
+    var formData = new FormData( form );
+
     $.ajax({
-        url: '/script/upload',
+        type: "POST",
+        url: '/script/upload?token=' + loadToken(),
         cache: false,
-        method: 'post',
-        dataType: 'html',
-        data: formData1,
-        success: function (data) {
+        contentType: false,
+        processData: false,
+        data: formData,
+        dataType : 'json',
+        success: function(data) {
             alert(data)
         }
     });
@@ -116,6 +113,4 @@ function onMakeScript() {
         }
     });
     */
-
-    return false
 }

@@ -11,53 +11,64 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
             integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
             crossorigin="anonymous"></script>
-    <script src="../scripts/scriptBuilder.js"></script>
+    <script src="../scripts/addScript.js"></script>
     <script src="../scripts/home.js"></script>
 
 </head>
 <body class="mainDiv">
 <div align="middle">
     <div class="card">
+
         <h1>Make your own script</h1>
 
-        <input id="scriptName" class="enterText" placeholder="Name of your script"/>
-        <textarea id="scriptDescription" class="enterText"
-                  placeholder="Put here your wonderful description"></textarea>
+        <form onsubmit="onMakeScript(); return false;" enctype="multipart/form-data">
 
-        <p class="titles">Input params</p>
+            <input id="scriptName" class="enterText" name="name" placeholder="Name of your script">
 
-        <div id="inputParams">
-            <div class="row" id="row0">
-                <input class="block enterText" placeholder="Param"/>
-                <input class="block enterText" style="width: 40px" placeholder="Units"/>
-                <button onclick="delRow(0)" class="block delBtn">Del</button>
+            <textarea id="scriptDescription" name="description" class="enterText"
+                      placeholder="Put here your wonderful description"></textarea>
+
+            <p class="titles">Input params</p>
+            <div id="inputParams">
+                <div class="row" id="row0">
+                    <input class="block enterText" name="inputParams[0]" placeholder="Param"/>
+                    <input class="block enterText" name="inputParamsUnits[0]" style="width: 40px" placeholder="Units"/>
+                    <button onclick="delRow(0)" class="block delBtn">Del</button>
+                </div>
+                <div class="row" id="row1">
+                    <input class="block enterText" name="inputParams[1]" placeholder="Param"/>
+                    <input class="block enterText" name="inputParamsUnits[1]" style="width: 40px" placeholder="Units"/>
+                    <button onclick="delRow(0)" class="block delBtn">Del</button>
+                </div>
             </div>
-        </div>
-        <button id="btnAddMoreInpParams" class="addBtn" onclick="addMore(&quot;inp&quot;)">Add more</button>
+            <button id="btnAddMoreInpParams" class="addBtn" onclick="addMore(&quot;inp&quot;)">Add more</button>
 
-        <p class="titles" align="middle">Output params</p>
+            <p class="titles" align="middle">Output params</p>
 
-        <div id="outputParams">
-            <div class="row" id="row1">
-                <input class="block enterText" placeholder="Param"/>
-                <input class="block enterText" style="width: 40px" placeholder="Units"/>
-                <button onclick="delRow(1)" class="block delBtn">Del</button>
+            <div id="outputParams">
+                <div class="row" id="row2">
+                    <input class="block enterText" name="outputParams[0]" placeholder="Param"/>
+                    <input class="block enterText" name="outputParamsUnits[0]" style="width: 40px" placeholder="Units"/>
+                    <button onclick="delRow(1)" class="block delBtn">Del</button>
+                </div>
+                <div class="row" id="row3">
+                    <input class="block enterText" name="outputParams[1]" placeholder="Param"/>
+                    <input class="block enterText" name="outputParamsUnits[1]" style="width: 40px" placeholder="Units"/>
+                    <button onclick="delRow(1)" class="block delBtn">Del</button>
+                </div>
             </div>
-        </div>
-        <button id="btnAddMoreOutParams" class="addBtn" onclick="addMore(&quot;out&quot;)">Add more</button>
+            <button id="btnAddMoreOutParams" class="addBtn" onclick="addMore(&quot;out&quot;)">Add more</button>
 
-        <br>
-
-        <p class="titles">Attach script.py</p>
-
-        <form onsubmit="onMakeScript(); return false" enctype="multipart/form-data">
-
-            <input type='file' id="getFile">
             <br>
-            <button type="submit" class="btn-grad">Create script</button>
+
+            <p class="titles">Attach script.py</p>
+            <input type='file' name="file" id="getFile">
+
+            <br>
+
+            <input type="submit" class="btn-grad" value="Create script">
 
         </form>
-
 
     </div>
 </div>

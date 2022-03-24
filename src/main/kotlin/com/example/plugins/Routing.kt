@@ -1,5 +1,6 @@
 package com.example.plugins
 
+import com.example.models.Param
 import com.example.models.User
 import io.ktor.client.statement.*
 import io.ktor.server.routing.*
@@ -99,18 +100,15 @@ fun Application.configureRouting() {
 
         post("script/upload") {
             // val token = call.request.cookies["token"].toString()
-
-            val token = call.receiveParameters()["token"] ?: return@post call.respond(HttpStatusCode.BadRequest)
-
-            println(token)
-
-            val user = Auth.getUserByToken(token)
             try {
-                if (user == null) throw Exception("You are not logged in")
+                val token = call.request.queryParameters["token"] ?: throw Exception("You are not logged in")
+                val user = Auth.getUserByToken(token) ?: throw Exception("You are not logged in")
                 val creatorID = user.id
                 var name = ""
                 var description = ""
                 var path = ""
+                var inputParams = mutableListOf<Param>()
+                var outputParams = mutableListOf<Param>()
                 var fileBytes: ByteArray = byteArrayOf()
                 val multipartData = call.receiveMultipart()
 
@@ -121,6 +119,22 @@ fun Application.configureRouting() {
                                 name = part.value
                             if (part.name == "description")
                                 description = part.value
+                            if(part.name?.contains("inputParamsUnits") == true) {
+                                val index = part.name!!.substringAfter("[").substringBefore("]").toInt()
+                                inputParams[index].unit = part.value
+                            } else if(part.name?.contains("inputParams") == true) {
+                                val index = part.name!!.substringAfter("[").substringBefore("]").toInt()
+                                val newParam = Param(part.value, "")
+                                inputParams.add(newParam)
+                            }
+                            if(part.name?.contains("outputParamsUnits") == true) {
+                                val index = part.name!!.substringAfter("[").substringBefore("]").toInt()
+                                outputParams[index].unit = part.value
+                            } else if(part.name?.contains("outputParams") == true) {
+                                val index = part.name!!.substringAfter("[").substringBefore("]").toInt()
+                                val newParam = Param(part.value, "")
+                                outputParams.add(newParam)
+                            }
                         }
                         is PartData.FileItem -> {
                             if (part.name == "file") {
@@ -133,10 +147,16 @@ fun Application.configureRouting() {
                 }
 
                 path = "scripts/" + Auth.generateToken() + ".py";
-                DbController.createFile(creatorID, name, description, path)
+                if (fileBytes.isNotEmpty()) File(path).writeBytes(fileBytes) else throw Exception("Empty script file")
 
-                if (fileBytes.isNotEmpty()) File(path).writeBytes(fileBytes)
-                else throw Exception("Empty script file")
+                val newScriptID = DbController.createFile(creatorID, name, description, path)
+
+                for(param in inputParams) {
+                    DbController.addParameter(newScriptID, param.paramName, param.unit, "input")
+                }
+                for(param in outputParams) {
+                    DbController.addParameter(newScriptID, param.paramName, param.unit, "output")
+                }
 
                 call.response.status(HttpStatusCode.OK)
             } catch (e: Exception) {

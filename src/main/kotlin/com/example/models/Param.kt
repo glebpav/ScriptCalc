@@ -4,7 +4,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Param (
-    val paramName: String,
-    val unit: String,
-    val value: String = ""
+    var paramName: String,
+    var unit: String,
+    var value: String = ""
 )
