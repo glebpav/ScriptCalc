@@ -60,8 +60,6 @@ function onMakeScript() {
     let scriptNameStr = document.getElementById("scriptName").value;
     let scriptPath = document.getElementById("getFile").files;
 
-    console.log("path to file: " + scriptPath[0]);
-
     let inputParamsStr = ""
     let inputParamsUnitsStr = ""
     let outputParamsStr = ""
@@ -76,19 +74,30 @@ function onMakeScript() {
         else outputParamsUnitsStr += outputParams[i].value + ","
     }
 
+    let file = $('form')[0].files[0]; // You need to use standard javascript object here
+    let formData1 = new FormData();
+    formData1.append("file", file)
+    formData1.append("token", loadToken())
+
+    console.log(formData1)
+
+    /*
+    let formData = new FormData();
+    formData.append('file', $("#getFile")[0].files[0]);
+    console.log(formData    )
+*/
     $.ajax({
         url: '/script/upload',
         cache: false,
         method: 'post',
         dataType: 'html',
-        data: {
-            'token': loadToken()
-        },
+        data: formData1,
         success: function (data) {
             alert(data)
         }
     });
 
+    /*
     $.ajax({
         url: '/createScript',
         cache: false,
@@ -106,6 +115,7 @@ function onMakeScript() {
             alert(data);
         }
     });
+    */
 
     return false
 }

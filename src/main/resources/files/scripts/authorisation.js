@@ -81,6 +81,8 @@ function onLogIn() {
         },
         success: function (output, status, xhr) {
 
+            console.log(xhr.getResponseHeader('Set-Cookie'))
+            console.log(xhr)
 
             let response = JSON.parse(output);
             let user = response.user;
@@ -92,7 +94,7 @@ function onLogIn() {
             saveToken(response.token);
             saveUser(user);
 
-            window.location.replace("/home.html");
+            // window.location.replace("/home.html");
         }
     });
 }

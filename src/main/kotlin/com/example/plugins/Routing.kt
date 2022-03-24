@@ -98,7 +98,12 @@ fun Application.configureRouting() {
         }
 
         post("script/upload") {
-            val token = call.request.cookies["token"].toString()
+            // val token = call.request.cookies["token"].toString()
+
+            val token = call.receiveParameters()["token"] ?: return@post call.respond(HttpStatusCode.BadRequest)
+
+            println(token)
+
             val user = Auth.getUserByToken(token)
             try {
                 if (user == null) throw Exception("You are not logged in")
@@ -108,6 +113,7 @@ fun Application.configureRouting() {
                 var path = ""
                 var fileBytes: ByteArray = byteArrayOf()
                 val multipartData = call.receiveMultipart()
+
                 multipartData.forEachPart { part ->
                     when (part) {
                         is PartData.FormItem -> {
@@ -125,12 +131,13 @@ fun Application.configureRouting() {
                         else -> {}
                     }
                 }
+
                 path = "scripts/" + Auth.generateToken() + ".py";
                 DbController.createFile(creatorID, name, description, path)
-                if (fileBytes.isNotEmpty())
-                    File(path).writeBytes(fileBytes)
-                else
-                    throw Exception("Empty script file")
+
+                if (fileBytes.isNotEmpty()) File(path).writeBytes(fileBytes)
+                else throw Exception("Empty script file")
+
                 call.response.status(HttpStatusCode.OK)
             } catch (e: Exception) {
                 call.response.status(HttpStatusCode(400, e.message.toString()))

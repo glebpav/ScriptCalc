@@ -20,45 +20,44 @@
     <div class="card">
         <h1>Make your own script</h1>
 
-        <form enctype="multipart/form-data">
-            <input id="scriptName" class="enterText" placeholder="Name of your script"/>
-            <textarea id="scriptDescription" class="enterText"
-                      placeholder="Put here your wonderful description"></textarea>
+        <input id="scriptName" class="enterText" placeholder="Name of your script"/>
+        <textarea id="scriptDescription" class="enterText"
+                  placeholder="Put here your wonderful description"></textarea>
 
-            <p class="titles">Input params</p>
+        <p class="titles">Input params</p>
 
-            <div id="inputParams">
-                <div class="row" id="row0">
-                    <input class="block enterText" placeholder="Param"/>
-                    <input class="block enterText" style="width: 40px" placeholder="Units"/>
-                    <button onclick="delRow(0)" class="block delBtn">Del</button>
-                </div>
+        <div id="inputParams">
+            <div class="row" id="row0">
+                <input class="block enterText" placeholder="Param"/>
+                <input class="block enterText" style="width: 40px" placeholder="Units"/>
+                <button onclick="delRow(0)" class="block delBtn">Del</button>
             </div>
-            <button id="btnAddMoreInpParams" class="addBtn" onclick="addMore(&quot;inp&quot;)">Add more</button>
+        </div>
+        <button id="btnAddMoreInpParams" class="addBtn" onclick="addMore(&quot;inp&quot;)">Add more</button>
 
-            <p class="titles" align="middle">Output params</p>
+        <p class="titles" align="middle">Output params</p>
 
-            <div id="outputParams">
-                <div class="row" id="row1">
-                    <input class="block enterText" placeholder="Param"/>
-                    <input class="block enterText" style="width: 40px" placeholder="Units"/>
-                    <button onclick="delRow(1)" class="block delBtn">Del</button>
-                </div>
+        <div id="outputParams">
+            <div class="row" id="row1">
+                <input class="block enterText" placeholder="Param"/>
+                <input class="block enterText" style="width: 40px" placeholder="Units"/>
+                <button onclick="delRow(1)" class="block delBtn">Del</button>
             </div>
-            <button id="btnAddMoreOutParams" class="addBtn" onclick="addMore(&quot;out&quot;)">Add more</button>
-
-            <br>
-
-            <p class="titles">Attach script.py</p>
-
-            <input type='file' id="getFile" >
-
-        </form>
+        </div>
+        <button id="btnAddMoreOutParams" class="addBtn" onclick="addMore(&quot;out&quot;)">Add more</button>
 
         <br>
 
+        <p class="titles">Attach script.py</p>
 
-        <button class="btn-grad" onclick="onMakeScript()">Create script</button>
+        <form onsubmit="onMakeScript(); return false" enctype="multipart/form-data">
+
+            <input type='file' id="getFile">
+            <br>
+            <button type="submit" class="btn-grad">Create script</button>
+
+        </form>
+
 
     </div>
 </div>
