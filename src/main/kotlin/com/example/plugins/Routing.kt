@@ -180,7 +180,7 @@ fun Application.configureRouting() {
             try {
                 val params = call.receiveParameters()
                 val scriptID = params["scriptID"]
-                val scriptInputParams = params["scriptInputParams"]?.split(";")
+                val scriptInputParams = params["scriptInputParams"]
 
                 call.respond(
                     listOf(
@@ -193,8 +193,19 @@ fun Application.configureRouting() {
             }
         }
 
-    }
+        get("script/load") {
+            try {
 
-//
+                val id = call.request.queryParameters["id"] ?: throw Exception("Empty ID")
+
+                call.respond(DbController.getScriptByID(id.toInt()))
+
+            } catch (e: Exception) {
+                call.response.status(HttpStatusCode(400, e.message.toString()))
+            }
+
+        }
+
+    }
 
 }

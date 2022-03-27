@@ -1,5 +1,6 @@
 package com.example.plugins
 
+import com.example.loadScriptData
 import com.example.models.Script
 import io.ktor.http.*
 import io.ktor.server.thymeleaf.Thymeleaf

@@ -12,14 +12,10 @@ object DbController {
     private const val dbName = "termoPhysics"
 
     fun createUser(login: String, password: String, name: String) {
-        if (!(login.length in 3..30))
-            throw Exception("Login length should be from 3 to 30 characters")
-        if (!(password.length in 3..255))
-            throw Exception("Password length should be from 3 to 30 characters")
-        if (!(name.length in 3..128))
-            throw Exception("Name length should be from 3 to 30 characters")
-        if (getUserByLogin(login) != null)
-            throw Exception("User with this login has already registered")
+        if (!(login.length in 3..30)) throw Exception("Login length should be from 3 to 30 characters")
+        if (!(password.length in 3..255)) throw Exception("Password length should be from 3 to 30 characters")
+        if (!(name.length in 3..128)) throw Exception("Name length should be from 3 to 30 characters")
+        if (getUserByLogin(login) != null) throw Exception("User with this login has already registered")
         Class.forName("com.mysql.cj.jdbc.Driver")
         val connection = DriverManager.getConnection("jdbc:mysql://$dbHost/$dbName", dbUser, dbPass)
         val sql = "INSERT INTO Users (login, password, name) VALUES (?, ?, ?);"
@@ -71,10 +67,8 @@ object DbController {
     }
 
     fun createFile(creatorID: Int, name: String, description: String, path: String): Int {
-        if (name.length !in 3..128)
-            throw Exception("Script name length should be from 3 to 128 characters")
-        if (description.length !in 0..65535)
-            throw Exception("Script description length should be from 0 to 65535 characters")
+        if (name.length !in 3..128) throw Exception("Script name length should be from 3 to 128 characters")
+        if (description.length !in 0..65535) throw Exception("Script description length should be from 0 to 65535 characters")
         Class.forName("com.mysql.cj.jdbc.Driver")
         val connection = DriverManager.getConnection("jdbc:mysql://$dbHost/$dbName", dbUser, dbPass)
         val sql = "INSERT INTO Scripts (creatorID, name, description, path) VALUES (?, ?, ?, ?);"
@@ -136,6 +130,16 @@ object DbController {
         }
         connection.close()
         return output.toList()
+    }
+
+    fun getScriptByID(id: Int): Script {
+        return Script(
+            15, 1, "Name", "cool Description", listOf(
+                Param(0, 15, "param1", "t", "input")
+            ), listOf(
+                Param(13, 15, "param3", "m30", "output", "12.0"), Param(14, 15, "param4", "s40", "output", "141.0")
+            )
+        )
     }
 
     fun getScriptParams(scriptID: Int): List<Param> {
