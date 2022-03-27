@@ -116,20 +116,21 @@ object DbController {
         val result = stmt.executeQuery()
         val output = mutableListOf<Script>()
         while (result.next()) {
-            val getScriptID = result.getInt(1)
-            val getScriptCreatorID = result.getInt(2)
-            val getScriptName = result.getString(3)
-            val getScriptDescription = result.getString(4)
-            val getScriptPath = result.getString(5)
+            val _getScriptID = result.getInt(1)
+            val _getScriptCreatorID = result.getInt(2)
+            val _getScriptName = result.getString(3)
+            val _getScriptDescription = result.getString(4)
+            val _getScriptPath = result.getString(5)
+            val _getScriptParams = getScriptParams(_getScriptID)
             output.add(
                 Script(
-                    getScriptID,
-                    getScriptCreatorID,
-                    getScriptName,
-                    getScriptDescription,
-                    getScriptInputParams(getScriptID),
-                    getScriptOutputParams(getScriptID),
-                    getScriptPath
+                    _getScriptID,
+                    _getScriptCreatorID,
+                    _getScriptName,
+                    _getScriptDescription,
+                    _getScriptParams.filter { it.type == "input" },
+                    _getScriptParams.filter { it.type == "output" },
+                    _getScriptPath
                 )
             )
         }
@@ -137,35 +138,21 @@ object DbController {
         return output.toList()
     }
 
-    fun getScriptInputParams(scriptID: Int): List<Param> {
+    fun getScriptParams(scriptID: Int): List<Param> {
         Class.forName("com.mysql.cj.jdbc.Driver")
         val connection = DriverManager.getConnection("jdbc:mysql://$dbHost/$dbName", dbUser, dbPass)
-        val sql = "SELECT * FROM Params WHERE scriptID = ? AND type = 'input';"
+        val sql = "SELECT * FROM Params WHERE scriptID = ?;"
         val stmt = connection.prepareStatement(sql)
         stmt.setInt(1, scriptID)
         val result = stmt.executeQuery()
         val output = mutableListOf<Param>()
         while (result.next()) {
+            val getParamID = result.getInt(1)
+            val getParamScriptID = result.getInt(2)
             val getParamName = result.getString(3)
             val getParamUnit = result.getString(4)
-            output.add(Param(getParamName, getParamUnit))
-        }
-        connection.close()
-        return output.toList()
-    }
-
-    fun getScriptOutputParams(scriptID: Int): List<Param> {
-        Class.forName("com.mysql.cj.jdbc.Driver")
-        val connection = DriverManager.getConnection("jdbc:mysql://$dbHost/$dbName", dbUser, dbPass)
-        val sql = "SELECT * FROM Params WHERE scriptID = ? AND type = 'output';"
-        val stmt = connection.prepareStatement(sql)
-        stmt.setInt(1, scriptID)
-        val result = stmt.executeQuery()
-        val output = mutableListOf<Param>()
-        while (result.next()) {
-            val getParamName = result.getString(3)
-            val getParamUnit = result.getString(4)
-            output.add(Param(getParamName, getParamUnit))
+            val getParamType = result.getString(5)
+            output.add(Param(getParamID, getParamScriptID, getParamName, getParamUnit, getParamType))
         }
         connection.close()
         return output.toList()
