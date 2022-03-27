@@ -2,6 +2,7 @@ package com.example.plugins
 
 import com.example.models.Param
 import com.example.models.User
+import io.ktor.client.statement.*
 import io.ktor.server.routing.*
 import io.ktor.http.*
 import io.ktor.http.content.*
@@ -98,7 +99,6 @@ fun Application.configureRouting() {
         }
 
         post("script/upload") {
-            // val token = call.request.cookies["token"].toString()
             try {
                 val token = call.request.queryParameters["token"] ?: throw Exception("You are not logged in")
                 val user = Auth.getUserByToken(token) ?: throw Exception("You are not logged in")
@@ -123,7 +123,7 @@ fun Application.configureRouting() {
                                 inputParams[index].unit = part.value
                             } else if (part.name?.contains("inputParams") == true) {
                                 val index = part.name!!.substringAfter("[").substringBefore("]").toInt()
-                                val newParam = Param(part.value, "")
+                                val newParam = Param(0, 0, part.value, "", "input")
                                 inputParams.add(newParam)
                             }
                             if (part.name?.contains("outputParamsUnits") == true) {
@@ -131,7 +131,7 @@ fun Application.configureRouting() {
                                 outputParams[index].unit = part.value
                             } else if (part.name?.contains("outputParams") == true) {
                                 val index = part.name!!.substringAfter("[").substringBefore("]").toInt()
-                                val newParam = Param(part.value, "")
+                                val newParam = Param(0, 0, part.value, "", "output")
                                 outputParams.add(newParam)
                             }
                         }
@@ -150,10 +150,10 @@ fun Application.configureRouting() {
 
                 val newScriptID = DbController.createFile(creatorID, name, description, path)
 
-                for (param in inputParams) {
+                for(param in inputParams) {
                     DbController.addParameter(newScriptID, param.paramName, param.unit, "input")
                 }
-                for (param in outputParams) {
+                for(param in outputParams) {
                     DbController.addParameter(newScriptID, param.paramName, param.unit, "output")
                 }
 
@@ -176,5 +176,25 @@ fun Application.configureRouting() {
 
         }
 
+        post("script/calculate") {
+            try {
+                val params = call.receiveParameters()
+                val scriptID = params["scriptID"]
+                val scriptInputParams = params["scriptInputParams"]?.split(";")
+
+                call.respond(
+                    listOf(
+                        Param(13,15,"param3", "m30", "output", "12.0"),
+                        Param(14,15,"param4", "s40", "output", "141.0")
+                    )
+                )
+            } catch (e: Exception) {
+                call.response.status(HttpStatusCode(400, e.message.toString()))
+            }
+        }
+
     }
+
+
+
 }
