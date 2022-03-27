@@ -1,4 +1,4 @@
-package ru.tashchyan.database
+package com.example.database
 
 import com.example.models.Param
 import com.example.models.Script

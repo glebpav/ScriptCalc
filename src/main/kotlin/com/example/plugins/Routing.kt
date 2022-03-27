@@ -2,7 +2,6 @@ package com.example.plugins
 
 import com.example.models.Param
 import com.example.models.User
-import io.ktor.client.statement.*
 import io.ktor.server.routing.*
 import io.ktor.http.*
 import io.ktor.http.content.*
@@ -14,7 +13,7 @@ import io.ktor.server.sessions.*
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import ru.tashchyan.Auth
-import ru.tashchyan.database.DbController
+import com.example.database.DbController
 import java.io.File
 
 fun Application.configureRouting() {
@@ -37,7 +36,7 @@ fun Application.configureRouting() {
         }
 
         get("/") {
-            call.respondText("Hello World!")
+            call.respondRedirect("/greeting.html")
         }
 
         get("/auth/check") {
@@ -107,8 +106,8 @@ fun Application.configureRouting() {
                 var name = ""
                 var description = ""
                 var path = ""
-                var inputParams = mutableListOf<Param>()
-                var outputParams = mutableListOf<Param>()
+                val inputParams = mutableListOf<Param>()
+                val outputParams = mutableListOf<Param>()
                 var fileBytes: ByteArray = byteArrayOf()
                 val multipartData = call.receiveMultipart()
 
@@ -119,18 +118,18 @@ fun Application.configureRouting() {
                                 name = part.value
                             if (part.name == "description")
                                 description = part.value
-                            if(part.name?.contains("inputParamsUnits") == true) {
+                            if (part.name?.contains("inputParamsUnits") == true) {
                                 val index = part.name!!.substringAfter("[").substringBefore("]").toInt()
                                 inputParams[index].unit = part.value
-                            } else if(part.name?.contains("inputParams") == true) {
+                            } else if (part.name?.contains("inputParams") == true) {
                                 val index = part.name!!.substringAfter("[").substringBefore("]").toInt()
                                 val newParam = Param(part.value, "")
                                 inputParams.add(newParam)
                             }
-                            if(part.name?.contains("outputParamsUnits") == true) {
+                            if (part.name?.contains("outputParamsUnits") == true) {
                                 val index = part.name!!.substringAfter("[").substringBefore("]").toInt()
                                 outputParams[index].unit = part.value
-                            } else if(part.name?.contains("outputParams") == true) {
+                            } else if (part.name?.contains("outputParams") == true) {
                                 val index = part.name!!.substringAfter("[").substringBefore("]").toInt()
                                 val newParam = Param(part.value, "")
                                 outputParams.add(newParam)
@@ -151,10 +150,10 @@ fun Application.configureRouting() {
 
                 val newScriptID = DbController.createFile(creatorID, name, description, path)
 
-                for(param in inputParams) {
+                for (param in inputParams) {
                     DbController.addParameter(newScriptID, param.paramName, param.unit, "input")
                 }
-                for(param in outputParams) {
+                for (param in outputParams) {
                     DbController.addParameter(newScriptID, param.paramName, param.unit, "output")
                 }
 
@@ -162,6 +161,19 @@ fun Application.configureRouting() {
             } catch (e: Exception) {
                 call.response.status(HttpStatusCode(400, e.message.toString()))
             }
+        }
+
+        get("script/loadAll") {
+
+            val token = call.request.queryParameters["token"] ?: return@get call.respondText(
+                "You are not logged in",
+                status = HttpStatusCode.BadRequest
+            )
+
+            val scripts = DbController.getAllScripts()
+
+            call.respond(scripts)
+
         }
 
     }

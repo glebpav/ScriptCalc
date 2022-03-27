@@ -226,3 +226,11 @@ input[type=file]::file-selector-button {
 }
 
 
+.scriptCard {
+    border-radius: 10px;
+    background: #e0e5ff;
+    box-shadow: inset 19px 19px 39px #bec3d9,
+    inset -19px -19px 39px #ffffff;
+}
+
+

@@ -9,4 +9,5 @@ data class User(
     val id: Int,
     val login: String,
     @Transient val password: String = "",
-    val name: String)
+    val name: String
+)
