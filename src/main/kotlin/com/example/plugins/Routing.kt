@@ -32,10 +32,6 @@ fun Application.configureRouting() {
             resources("files")
         }
 
-        static("/processScript") {
-            resources("files")
-        }
-
         get("/") {
             call.respondRedirect("/greeting.html")
         }

@@ -1,14 +1,4 @@
 
-loadAllScripts()
-
-function loadUser() {
-    return JSON.parse(localStorage.getItem("user"))
-}
-
-function loadToken() {
-    return localStorage.getItem("token")
-}
-
 function setTitle() {
     document.getElementById("greetingTitleId").innerText = "Hello, " + loadUser().name
 }
@@ -88,5 +78,5 @@ function printScripts(scriptsArray) {
 }
 
 function goToScript(scriptID) {
-    window.location.href = '/script?id=' + scriptID;
+    window.location.href = "/script.html";
 }
