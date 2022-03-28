@@ -1,3 +1,4 @@
+
 loadAllScripts()
 
 function loadUser() {
@@ -14,7 +15,8 @@ function setTitle() {
 
 function loadAllScripts() {
 
-    let token = loadToken()
+    let token = loadToken();
+    let jsonData;
 
     $.ajax({
         type: "GET",
@@ -23,59 +25,68 @@ function loadAllScripts() {
         dataType : 'html',
         success: function(data) {
 
-            let jsonData = JSON.parse(data)
+            jsonData = JSON.parse(data);
 
             for (let i = 0; i < jsonData.length; i++) {
-                console.log(jsonData[i])
+                console.log(jsonData[i]);
+                console.log("hello")
             }
-
-            return jsonData
+            console.log(jsonData.length)
+            printScripts(jsonData)
 
         }
     });
-
-    return undefined
-
 }
 
-function printScripts() {
+function printScripts(scriptsArray) {
 
-    let scriptsArray = loadAllScripts()
+    let placeHolder = document.getElementById("IdScriptHolder ")
 
-    let horizontalDivArray;
-    let horizontalDiv;
+    let rowDiv
+    let horizontalDivArray = [];
+    let goToScriptBtn;
     let cardDiv;
     let titleP;
     let descP;
-    let goToScriptBtn;
 
     let scriptId;
 
-    for (let i = 0; i < scriptsArray.size(); i++) {
+    for (let i = 0; i < scriptsArray.length; i++) {
 
         scriptId = scriptsArray[i].id
 
-        horizontalDiv = document.createElement("div");
-        cardDiv = document.createElement("div");
+        cardDiv = createElement('div', {class:'block scriptCard'});
         titleP = document.createElement("p");
         descP = document.createElement("p");
-        goToScriptBtn = document.createElement("button");
+        goToScriptBtn = createElement("button", {class: "goToScriptBtn", onclick: "goToScript(" + scriptId + ")"});
 
         titleP.innerText = scriptsArray[i].name;
-        descP.innerText = scriptsArray[i].description;
-        goToScriptBtn.setAttribute("onClick", "goToScript(" + scriptId + ")");
+        let textOfDesc = scriptsArray[i].description
+        if (textOfDesc.length > 50) descP.innerText = textOfDesc.substring(0, 50) + "...";
+        else descP.innerText = textOfDesc
 
-        horizontalDiv.appendChild(titleP)
-        horizontalDiv.appendChild(titleP)
-        horizontalDiv.appendChild(goToScriptBtn)
-        horizontalDivArray.add(horizontalDiv)
+        cardDiv.appendChild(titleP)
+        cardDiv.appendChild(descP)
+        cardDiv.appendChild(goToScriptBtn)
+        horizontalDivArray.push(cardDiv)
 
     }
 
+    let buf = 0;
+    rowDiv = createElement("div", {class: "row"});
     for (let i = 0; i < horizontalDivArray.length; i += 1) {
-
+        if (buf < 2 && i !== horizontalDivArray.length-1) rowDiv.appendChild(horizontalDivArray[i]);
+        else {
+            rowDiv.appendChild(horizontalDivArray[i])
+            placeHolder.appendChild(rowDiv)
+            rowDiv = createElement("div", {class: "row"});
+            buf = -1
+        }
+        buf += 1
     }
 
+}
 
-    //
+function goToScript(scriptID) {
+    window.location.href = '/script?id=' + scriptID;
 }
