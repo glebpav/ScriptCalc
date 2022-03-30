@@ -2,7 +2,8 @@ let createElement = function (type, props) {
     const $e = document.createElement(type);
 
     for (const prop in props) {
-        $e.setAttribute(prop, props[prop]);
+        if (prop === "innerText") $e.innerText = props[prop]
+        else $e.setAttribute(prop, props[prop]);
     }
 
     return $e;
@@ -31,4 +32,12 @@ function saveToken(token) {
 
 function saveUser(user) {
     localStorage.setItem('user', JSON.stringify(user))
+}
+
+function saveScriptId(id) {
+    localStorage.setItem("scriptId", id)
+}
+
+function loadScriptId() {
+    return localStorage.getItem("scriptId")
 }

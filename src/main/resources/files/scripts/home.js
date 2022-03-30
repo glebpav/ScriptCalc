@@ -1,3 +1,12 @@
+loadAllScripts()
+
+function loadUser() {
+    return JSON.parse(localStorage.getItem("user"))
+}
+
+function loadToken() {
+    return localStorage.getItem("token")
+}
 
 function setTitle() {
     document.getElementById("greetingTitleId").innerText = "Hello, " + loadUser().name
@@ -26,6 +35,9 @@ function loadAllScripts() {
 
         }
     });
+
+    return undefined
+
 }
 
 function printScripts(scriptsArray) {
@@ -78,5 +90,7 @@ function printScripts(scriptsArray) {
 }
 
 function goToScript(scriptID) {
+    console.log(scriptID);
+    saveScriptId(scriptID);
     window.location.href = "/script.html";
 }
