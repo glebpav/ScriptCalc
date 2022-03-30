@@ -116,6 +116,11 @@ function btnCalculate() {
         inputsStr += String(param.paramName) + " = " +  String(param.value);
         if (i !== inputs.length-1) inputsStr += "; "
 
+        if (param.value === "") {
+            alert("Inputs can't be empty")
+            return
+        }
+
     }
     inputsStr += " )"
 
@@ -126,7 +131,7 @@ function btnCalculate() {
         dataType: 'html',
         data: {
             'scriptId': id,
-            'inputParams': JSON.stringify(inputArray)
+            'scriptInputParams': JSON.stringify(inputArray)
         },
         success: function (data) {
 

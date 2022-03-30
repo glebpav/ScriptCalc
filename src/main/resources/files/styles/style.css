@@ -74,7 +74,7 @@ input[type=file]::file-selector-button {
 .row {
     width: 100%;
     text-align: center;
-/ / center the content of the container
+// center the content of the container
 }
 
 .block {
@@ -84,11 +84,9 @@ input[type=file]::file-selector-button {
 }
 
 .delBtn {
-    width: 60px;
+    width: 50px;
     padding: 5px;
     border: 0px;
-    margin-bottom: 10px;
-    margin-left: 20px;
     color: #002148;
     font-family: Varela Round;
     border-radius: 10px;
@@ -98,7 +96,7 @@ input[type=file]::file-selector-button {
 }
 
 .addBtn {
-    width: 120px;
+    width: 110px;
     padding: 5px;
     border: 0px;
     margin-top: 12px;
@@ -244,7 +242,6 @@ input[type=file]::file-selector-button {
     height: 25px;
 
     border: 0px;
-    alignment: bottom;
     color: #002148;
     cursor: pointer;
     font-family: Varela Round;
@@ -253,4 +250,24 @@ input[type=file]::file-selector-button {
     box-shadow: 4px 4px 8px #bec3d9,
     -4px -4px 8px #ffffff;
 }
+
+.scriptCard {
+    width: 300px;
+    height: 140px;
+    justify-content: space-between;
+
+    margin: 10px;
+    border-radius: 10px;
+    background: #e0e5ff;
+    box-shadow: inset 19px 19px 39px #bec3d9,
+    inset -19px -19px 39px #ffffff;
+}
+
+.rowWithSpace {
+    display: inline-block;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
 

@@ -1,5 +1,3 @@
-loadAllScripts()
-
 function loadUser() {
     return JSON.parse(localStorage.getItem("user"))
 }
@@ -21,8 +19,8 @@ function loadAllScripts() {
         type: "GET",
         url: '/script/loadAll?token=' + token,
         cache: false,
-        dataType : 'html',
-        success: function(data) {
+        dataType: 'html',
+        success: function (data) {
 
             jsonData = JSON.parse(data);
 
@@ -57,7 +55,7 @@ function printScripts(scriptsArray) {
 
         scriptId = scriptsArray[i].id
 
-        cardDiv = createElement('div', {class:'block scriptCard'});
+        cardDiv = createElement('div', {class: 'rowWithSpace scriptCard'});
         titleP = document.createElement("p");
         descP = document.createElement("p");
         goToScriptBtn = createElement("button", {class: "goToScriptBtn", onclick: "goToScript(" + scriptId + ")"});
@@ -77,7 +75,7 @@ function printScripts(scriptsArray) {
     let buf = 0;
     rowDiv = createElement("div", {class: "row"});
     for (let i = 0; i < horizontalDivArray.length; i += 1) {
-        if (buf < 2 && i !== horizontalDivArray.length-1) rowDiv.appendChild(horizontalDivArray[i]);
+        if (buf < 2 && i !== horizontalDivArray.length - 1) rowDiv.appendChild(horizontalDivArray[i]);
         else {
             rowDiv.appendChild(horizontalDivArray[i])
             placeHolder.appendChild(rowDiv)
@@ -87,6 +85,10 @@ function printScripts(scriptsArray) {
         buf += 1
     }
 
+}
+
+function onAddNewScript() {
+    window.location.href = "/addScript.html";
 }
 
 function goToScript(scriptID) {
