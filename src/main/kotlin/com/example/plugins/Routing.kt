@@ -142,6 +142,8 @@ fun Application.configureRouting() {
                     }
                 }
 
+                if(!(File("scripts").exists()))
+                    File("scripts").mkdirs()
                 path = "scripts/" + Auth.generateToken() + ".py";
                 if (fileBytes.isNotEmpty()) File(path).writeBytes(fileBytes) else throw Exception("Empty script file")
 
