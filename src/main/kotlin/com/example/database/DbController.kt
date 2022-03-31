@@ -67,7 +67,7 @@ object DbController {
     }
 
     fun createFile(creatorID: Int, name: String, description: String, path: String): Int {
-        if (name.length !in 3..128) throw Exception("Script name length should be from 3 to 128 characters")
+        if (name.length !in 3..128) throw Exception("Script paramName length should be from 3 to 128 characters")
         if (description.length !in 0..65535) throw Exception("Script description length should be from 0 to 65535 characters")
         Class.forName("com.mysql.cj.jdbc.Driver")
         val connection = DriverManager.getConnection("jdbc:mysql://$dbHost/$dbName", dbUser, dbPass)
@@ -92,7 +92,7 @@ object DbController {
     fun addParameter(scriptID: Int, name: String, unit: String, type: String) {
         Class.forName("com.mysql.cj.jdbc.Driver")
         val connection = DriverManager.getConnection("jdbc:mysql://$dbHost/$dbName", dbUser, dbPass)
-        val sql = "INSERT INTO Params (scriptID, name, unit, type) VALUES (?, ?, ?, ?);"
+        val sql = "INSERT INTO Params (scriptID, paramName, unit, type) VALUES (?, ?, ?, ?);"
         val stmt = connection.prepareStatement(sql)
         stmt.setInt(1, scriptID)
         stmt.setString(2, name)
@@ -132,14 +132,33 @@ object DbController {
         return output.toList()
     }
 
-    fun getScriptByID(id: Int): Script {
-        return Script(
-            15, 1, "Name", "cool Description", listOf(
-                Param(0, 15, "param1", "t", "input")
-            ), listOf(
-                Param(13, 15, "param3", "m30", "output", "12.0"), Param(14, 15, "param4", "s40", "output", "141.0")
-            )
-        )
+    fun getScriptByID(id: Int): Script? {
+        Class.forName("com.mysql.cj.jdbc.Driver")
+        val connection = DriverManager.getConnection("jdbc:mysql://$dbHost/$dbName", dbUser, dbPass)
+        val sql = "SELECT * FROM Scripts WHERE id = ?;"
+        val stmt = connection.prepareStatement(sql)
+        stmt.setInt(1, id)
+        val result = stmt.executeQuery()
+        var output: Script? = null
+        while (result.next()) {
+            val _getScriptID = result.getInt(1)
+            val _getScriptCreatorID = result.getInt(2)
+            val _getScriptName = result.getString(3)
+            val _getScriptDescription = result.getString(4)
+            val _getScriptPath = result.getString(5)
+            val _getScriptParams = getScriptParams(_getScriptID)
+            output = Script(
+                    _getScriptID,
+                    _getScriptCreatorID,
+                    _getScriptName,
+                    _getScriptDescription,
+                    _getScriptParams.filter { it.type == "input" },
+                    _getScriptParams.filter { it.type == "output" },
+                    _getScriptPath
+                )
+        }
+        connection.close()
+        return output
     }
 
     fun getScriptParams(scriptID: Int): List<Param> {

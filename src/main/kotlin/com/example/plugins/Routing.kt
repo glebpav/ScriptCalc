@@ -1,8 +1,8 @@
 package com.example.plugins
 
+import com.example.PyController
 import com.example.models.Param
 import com.example.models.User
-import io.ktor.client.statement.*
 import io.ktor.server.routing.*
 import io.ktor.http.*
 import io.ktor.http.content.*
@@ -15,6 +15,7 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import ru.tashchyan.Auth
 import com.example.database.DbController
+import kotlinx.serialization.decodeFromString
 import java.io.File
 
 fun Application.configureRouting() {
@@ -53,7 +54,7 @@ fun Application.configureRouting() {
             val params = call.receiveParameters()
             val login = params["login"] ?: ""
             val password = params["password"] ?: ""
-            val name = params["name"] ?: ""
+            val name = params["paramName"] ?: ""
             try {
                 DbController.createUser(login, password, name)
                 call.response.status(HttpStatusCode.OK)
@@ -114,7 +115,7 @@ fun Application.configureRouting() {
                 multipartData.forEachPart { part ->
                     when (part) {
                         is PartData.FormItem -> {
-                            if (part.name == "name")
+                            if (part.name == "paramName")
                                 name = part.value
                             if (part.name == "description")
                                 description = part.value
@@ -179,15 +180,25 @@ fun Application.configureRouting() {
         post("script/calculate") {
             try {
                 val params = call.receiveParameters()
-                val scriptID = params["scriptID"]
-                val scriptInputParams = params["scriptInputParams"]
+                val scriptID = params["scriptID"]?.toInt() ?: throw Exception("Invalid script id")
 
-                call.respond(
-                    listOf(
-                        Param(13,15,"param3", "m30", "output", "12.0"),
-                        Param(14,15,"param4", "s40", "output", "141.0")
-                    )
-                )
+                val scriptInputParams = Json.decodeFromString<List<Param>>(params["scriptInputParams"].toString())
+
+                val script = DbController.getScriptByID(scriptID) ?: throw Exception("Can't find script with this id")
+
+                val inputTextParams = mutableListOf<String>()
+                scriptInputParams.forEach { inputTextParams.add(it.value) }
+
+                val outputTextParams = PyController.pycall(script.path, inputTextParams.toList())
+                if(outputTextParams.size != script.outputParams.size) throw Exception("Number of arguments returned by script is invalid")
+
+                var i = 0
+                while(i < script.outputParams.size) {
+                    script.outputParams[i].value = outputTextParams[i]
+                    i++
+                }
+
+                call.respond(script.outputParams)
             } catch (e: Exception) {
                 call.response.status(HttpStatusCode(400, e.message.toString()))
             }
@@ -195,15 +206,14 @@ fun Application.configureRouting() {
 
         get("script/load") {
             try {
-
                 val id = call.request.queryParameters["id"] ?: throw Exception("Empty ID")
+                val script = DbController.getScriptByID(id.toInt()) ?: throw Exception("Plugin with this id not found")
 
-                call.respond(DbController.getScriptByID(id.toInt()))
+                call.respond(script)
 
             } catch (e: Exception) {
                 call.response.status(HttpStatusCode(400, e.message.toString()))
             }
-
         }
 
     }

@@ -5,7 +5,7 @@ import java.util.*
 import kotlin.collections.LinkedHashSet
 
 object Auth {
-    //Набор всех открытых http сеансов пользователей. С каждым сеансом связан пользователь UserClient{userID, name}
+    //Набор всех открытых http сеансов пользователей. С каждым сеансом связан пользователь UserClient{userID, paramName}
     private val sessions = Collections.synchronizedSet<Session?>(LinkedHashSet())
     data class Session(val token: String, val user: User)
 
