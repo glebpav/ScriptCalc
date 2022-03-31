@@ -3,13 +3,11 @@ package com.example.plugins
 import com.example.models.Script
 import io.ktor.http.*
 import io.ktor.server.thymeleaf.Thymeleaf
-import io.ktor.server.thymeleaf.ThymeleafContent
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver
 import io.ktor.server.application.*
 import io.ktor.server.http.content.*
-import io.ktor.server.response.*
-import io.ktor.server.request.*
 import io.ktor.server.routing.*
+
 
 fun Application.configureTemplating() {
     install(Thymeleaf) {

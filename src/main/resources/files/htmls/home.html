@@ -5,27 +5,32 @@
     <title>Home</title>
 
     <link rel="stylesheet" href="../styles/style.css">
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Varela+Round" >
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Varela+Round">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <script src="../scripts/home.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
             integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
             crossorigin="anonymous"></script>
+    <script src="../scripts/home.js"></script>
+    <script src="../scripts/utils.js"></script>
+
 </head>
-<body class="mainDiv" >
-    <div style="height: 100%" align="middle">
-        <div style="width: 80%; height: 80%" class="card">
+<body class="mainDiv">
+<div style="height: 100%" align="middle">
+    <div style="width: 80%; height: 80%" class="card">
 
-            <h1 id="greetingTitleId" class="titles" ></h1>
+        <h1 id="greetingTitleId" class="titles"></h1>
 
-            <p style="margin-top: 20px; text-align: left;"> Library of Scripts</p>
+        <p style="margin-top: 20px; text-align: left;"> Library of Scripts</p>
 
-            <div id="IdScriptHolder "></div>
+        <div id="IdScriptHolder "></div>
 
-        </div>
+        <button class="btn-grad" onclick="onAddNewScript()">Add new</button>
+
     </div>
+</div>
 
-<script>setTitle()</script>
+<script>setTitle();loadAllScripts()</script>
 
 </body>
 </html>

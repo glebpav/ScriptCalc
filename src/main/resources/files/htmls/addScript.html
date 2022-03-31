@@ -12,7 +12,7 @@
             integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
             crossorigin="anonymous"></script>
     <script src="../scripts/addScript.js"></script>
-    <script src="../scripts/home.js"></script>
+    <script src="../scripts/utils.js"></script>
 
 </head>
 <body class="mainDiv">
@@ -33,32 +33,27 @@
                 <div class="row" id="row0">
                     <input class="block enterText" name="inputParams[0]" placeholder="Param"/>
                     <input class="block enterText" name="inputParamsUnits[0]" style="width: 40px" placeholder="Units"/>
-                    <button onclick="delRow(0)" class="block delBtn">Del</button>
-                </div>
-                <div class="row" id="row1">
-                    <input class="block enterText" name="inputParams[1]" placeholder="Param"/>
-                    <input class="block enterText" name="inputParamsUnits[1]" style="width: 40px" placeholder="Units"/>
-                    <button onclick="delRow(0)" class="block delBtn">Del</button>
                 </div>
             </div>
-            <button id="btnAddMoreInpParams" class="addBtn" onclick="addMore(&quot;inp&quot;)">Add more</button>
 
-            <p class="titles" align="middle">Output params</p>
+            <hr style="width: 160px; background: #e0e5ff" />
+
+            <button id="btnAddMoreInpParams" class="addBtn" onclick="addMore(&quot;inp&quot;)">Add more</button>
+            <button id="btnDelLastInpParams" class="delBtn" onclick="delLast(&quot;inp&quot;)">del</button>
+
+            <p class="titles" align="middle" style="margin-top: 30px;">Output params</p>
 
             <div id="outputParams">
                 <div class="row" id="row2">
                     <input class="block enterText" name="outputParams[0]" placeholder="Param"/>
                     <input class="block enterText" name="outputParamsUnits[0]" style="width: 40px" placeholder="Units"/>
-                    <button onclick="delRow(1)" class="block delBtn">Del</button>
-                </div>
-                <div class="row" id="row3">
-                    <input class="block enterText" name="outputParams[1]" placeholder="Param"/>
-                    <input class="block enterText" name="outputParamsUnits[1]" style="width: 40px" placeholder="Units"/>
-                    <button onclick="delRow(1)" class="block delBtn">Del</button>
                 </div>
             </div>
-            <button id="btnAddMoreOutParams" class="addBtn" onclick="addMore(&quot;out&quot;)">Add more</button>
 
+            <hr style="width: 160px;  background: #e0e5ff" />
+
+            <button id="btnAddMoreOutParams" class="addBtn" onclick="addMore(&quot;out&quot;)">Add more</button>
+            <button id="btnDelLastOutParams" class="delBtn" onclick="delLast(&quot;out&quot;)">del</button>
             <br>
 
             <p class="titles">Attach script.py</p>

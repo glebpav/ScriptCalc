@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" href="../styles/style.css"/>
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Varela+Round"/>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"></script>
+
+    <script src="../scripts/script.js"></script>
+    <script src="../scripts/utils.js"></script>
+
+</head>
+<body class="mainDiv">
+<div style="height: 100%" align="middle">
+    <div class="card" align="middle">
+        <h1 id="scriptNameID" style="margin-top: 30px"></h1>
+        <p id="scriptDescriptionID" style="margin-top: 10px"></p>
+
+        <div id="palaceHolder" style="margin-top: 40px">
+
+            <p style="text-align: left; margin-left: 220px">Input params</p>
+            <div id="allInputsParams"></div>
+            <button style="margin-top: 30px" class="btn-grad" onclick="btnCalculate()">calculate</button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>loadScriptData();</script>
+
+</body>
+</html>
