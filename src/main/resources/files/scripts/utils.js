@@ -3,6 +3,7 @@ let createElement = function (type, props) {
 
     for (const prop in props) {
         if (prop === "innerText") $e.innerText = props[prop]
+        else if (prop === "innerHtml") $e.innerHtml = props[prop]
         else $e.setAttribute(prop, props[prop]);
     }
 

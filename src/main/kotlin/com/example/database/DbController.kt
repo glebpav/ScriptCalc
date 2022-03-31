@@ -67,7 +67,7 @@ object DbController {
     }
 
     fun createFile(creatorID: Int, name: String, description: String, path: String): Int {
-        if (name.length !in 3..128) throw Exception("Script paramName length should be from 3 to 128 characters")
+        if (name.length !in 3..128) throw Exception("Script name length should be from 3 to 128 characters")
         if (description.length !in 0..65535) throw Exception("Script description length should be from 0 to 65535 characters")
         Class.forName("com.mysql.cj.jdbc.Driver")
         val connection = DriverManager.getConnection("jdbc:mysql://$dbHost/$dbName", dbUser, dbPass)

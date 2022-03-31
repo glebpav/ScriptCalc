@@ -224,19 +224,6 @@ input[type=file]::file-selector-button {
 }
 
 
-
-.scriptCard {
-    width: 300px;
-    height: 140px;
-    justify-content: space-between;
-
-    margin: 10px;
-    border-radius: 10px;
-    background: #e0e5ff;
-    box-shadow: inset 19px 19px 39px #bec3d9,
-    inset -19px -19px 39px #ffffff;
-}
-
 .goToScriptBtn {
     width: 100px;
     height: 25px;
@@ -252,9 +239,10 @@ input[type=file]::file-selector-button {
 }
 
 .scriptCard {
-    width: 300px;
+    width: 250px;
     height: 140px;
     justify-content: space-between;
+    float: left;
 
     margin: 10px;
     border-radius: 10px;
@@ -264,9 +252,11 @@ input[type=file]::file-selector-button {
 }
 
 .rowWithSpace {
-    display: inline-block;
-    flex-direction: column;
-    justify-content: space-between;
+    display: block;
+}
+
+.div-floating {
+    overflow: hidden;
 }
 
 

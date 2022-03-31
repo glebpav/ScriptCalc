@@ -111,7 +111,7 @@ fun Application.configureRouting() {
                 multipartData.forEachPart { part ->
                     when (part) {
                         is PartData.FormItem -> {
-                            if (part.name == "paramName")
+                            if (part.name == "name")
                                 name = part.value
                             if (part.name == "description")
                                 description = part.value

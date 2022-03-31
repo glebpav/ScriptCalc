@@ -1,13 +1,15 @@
-function loadUser() {
-    return JSON.parse(localStorage.getItem("user"))
-}
 
-function loadToken() {
-    return localStorage.getItem("token")
-}
+
 
 function setTitle() {
     document.getElementById("greetingTitleId").innerText = "Hello, " + loadUser().name
+/*
+    let token = loadToken();
+    console.log(token)
+    if (!token) {
+        document.getElementById("btnAddNewScript").disabled = true;
+    }
+*/
 }
 
 function loadAllScripts() {
@@ -56,9 +58,13 @@ function printScripts(scriptsArray) {
         scriptId = scriptsArray[i].id
 
         cardDiv = createElement('div', {class: 'rowWithSpace scriptCard'});
-        titleP = document.createElement("p");
-        descP = document.createElement("p");
-        goToScriptBtn = createElement("button", {class: "goToScriptBtn", onclick: "goToScript(" + scriptId + ")"});
+        titleP = document.createElement("h3");
+        descP = createElement("p", {style: "font-size: 0.9em;"});
+        goToScriptBtn = createElement("button", {
+            class: "goToScriptBtn",
+            onclick: "goToScript(" + scriptId + ")",
+            innerText: "calc"
+        });
 
         titleP.innerText = scriptsArray[i].name;
         let textOfDesc = scriptsArray[i].description
@@ -73,16 +79,20 @@ function printScripts(scriptsArray) {
     }
 
     let buf = 0;
-    rowDiv = createElement("div", {class: "row"});
+    rowDiv = createElement("div", {class: "row div-floating"});
     for (let i = 0; i < horizontalDivArray.length; i += 1) {
+        /*
         if (buf < 2 && i !== horizontalDivArray.length - 1) rowDiv.appendChild(horizontalDivArray[i]);
         else {
             rowDiv.appendChild(horizontalDivArray[i])
             placeHolder.appendChild(rowDiv)
-            rowDiv = createElement("div", {class: "row"});
+            rowDiv = createElement("div", {class: "row div-floating"});
             buf = -1
         }
         buf += 1
+
+         */
+        placeHolder.appendChild(horizontalDivArray[i])
     }
 
 }

@@ -73,9 +73,11 @@ function onMakeScript() {
         contentType: false,
         processData: false,
         data: formData,
-        dataType: 'json',
         success: function (data) {
-            alert(data)
+            window.location = "home.html"
+        },
+        error: function (xhr, status, message) {
+            alert(message);
         }
     });
 

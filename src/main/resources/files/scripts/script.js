@@ -111,6 +111,11 @@ function btnCalculate() {
         param.id = inputs[i].getElementsByTagName("div")[0].innerText;
         param.value = inputs[i].getElementsByTagName("input")[0].value;
         param.paramName = inputs[i].getElementsByTagName("p")[0].innerText;
+
+        param.scriptID = 0;
+        param.unit = "none";
+        param.type = "input";
+
         inputArray.push(param);
 
         inputsStr += String(param.paramName) + " = " +  String(param.value);

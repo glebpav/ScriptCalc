@@ -1,5 +1,6 @@
 function guestClicked() {
-
+    saveToken(undefined)
+    window.location.replace("/home.html")
 }
 
 function authorisationClicked() {
