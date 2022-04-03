@@ -2,7 +2,8 @@
 
 
 function setTitle() {
-    document.getElementById("greetingTitleId").innerText = "Hello, " + loadUser().name
+    if(loadUser() != null)
+        document.getElementById("greetingTitleId").innerText = "Hello, " + loadUser().name
 /*
     let token = loadToken();
     console.log(token)
@@ -23,6 +24,8 @@ function loadAllScripts() {
         cache: false,
         dataType: 'html',
         success: function (data) {
+            //hide loading caption
+            document.getElementById("loadingCaption").style.display = "none"
 
             jsonData = JSON.parse(data);
 
