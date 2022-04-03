@@ -50,7 +50,7 @@ fun Application.configureRouting() {
             val params = call.receiveParameters()
             val login = params["login"] ?: ""
             val password = params["password"] ?: ""
-            val name = params["paramName"] ?: ""
+            val name = params["name"] ?: ""
             try {
                 DbController.createUser(login, password, name)
                 call.response.status(HttpStatusCode.OK)

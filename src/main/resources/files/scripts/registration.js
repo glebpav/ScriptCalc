@@ -11,11 +11,13 @@ function registerUser() {
     let password2 = document.getElementById("inputPassword2").value
 
 
-
     if (password !== password2) {
         alert("Passwords are not the same")
         return 0
     }
+
+    document.getElementById("regButton").enabled = false
+    document.getElementById("regButton").innerHTML = "Loading..."
 
     $.ajax({
         url: 'auth/register',
@@ -28,6 +30,8 @@ function registerUser() {
             "name": name,
         },
         error: function (xhr, status, message) {
+            document.getElementById("regButton").enabled = true
+            document.getElementById("regButton").innerHTML = "Create user"
             alert(message);
         },
         success: function (data) {
@@ -40,8 +44,7 @@ function registerUser() {
             saveToken(response.token)
             saveUser(user)
             */
-
-            alert("Successful");
+            window.location.href = "/authorisation.html"
         },
     });
 }
