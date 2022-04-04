@@ -1,16 +1,6 @@
-
-
-
 function setTitle() {
-    if(loadUser() != null)
+    if (loadUser() != null)
         document.getElementById("greetingTitleId").innerText = "Hello, " + loadUser().name
-/*
-    let token = loadToken();
-    console.log(token)
-    if (!token) {
-        document.getElementById("btnAddNewScript").disabled = true;
-    }
-*/
 }
 
 function loadAllScripts() {
@@ -26,16 +16,8 @@ function loadAllScripts() {
         success: function (data) {
             //hide loading caption
             document.getElementById("loadingCaption").style.display = "none"
-
             jsonData = JSON.parse(data);
-
-            for (let i = 0; i < jsonData.length; i++) {
-                console.log(jsonData[i]);
-                console.log("hello")
-            }
-            console.log(jsonData.length)
             printScripts(jsonData)
-
         }
     });
 
@@ -47,32 +29,36 @@ function printScripts(scriptsArray) {
 
     let placeHolder = document.getElementById("IdScriptHolder ")
 
-    let rowDiv
     let horizontalDivArray = [];
     let goToScriptBtn;
     let cardDiv;
+    let rowDiv
     let titleP;
     let descP;
 
     let scriptId;
+    let textOfDesc;
 
     for (let i = 0; i < scriptsArray.length; i++) {
 
         scriptId = scriptsArray[i].id
+        textOfDesc = scriptsArray[i].description
 
-        cardDiv = createElement('div', {class: 'rowWithSpace scriptCard'});
-        titleP = document.createElement("h3");
-        descP = createElement("p", {style: "font-size: 0.9em;"});
+        cardDiv = createElement('div', {
+            class: 'rowWithSpace scriptCard'
+        });
+        titleP = createElement("h3", {
+            innerText: scriptsArray[i].name
+        });
+        descP = createElement("p", {
+            innerText: (textOfDesc.length > 50) ? textOfDesc.substring(0, 50) : textOfDesc,
+            style: "font-size: 0.9em;"
+        });
         goToScriptBtn = createElement("button", {
             class: "goToScriptBtn",
             onclick: "goToScript(" + scriptId + ")",
             innerText: "calc"
         });
-
-        titleP.innerText = scriptsArray[i].name;
-        let textOfDesc = scriptsArray[i].description
-        if (textOfDesc.length > 50) descP.innerText = textOfDesc.substring(0, 50) + "...";
-        else descP.innerText = textOfDesc
 
         cardDiv.appendChild(titleP)
         cardDiv.appendChild(descP)
@@ -105,7 +91,6 @@ function onAddNewScript() {
 }
 
 function goToScript(scriptID) {
-    console.log(scriptID);
     saveScriptId(scriptID);
     window.location.href = "/script.html";
 }

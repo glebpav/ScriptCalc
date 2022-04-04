@@ -14,11 +14,11 @@ function addMore(type) {
     let rowId = (type === "inp") ? ++countOfInputParams : ++countOfOutputParams;
 
     let newDiv = createElement("div", {class: "row"});
-
     let newInput = createElement("input", {
-        class: "block enterText", placeHolder: "Param", name: namePrefix + "Params[" + rowId + "]"
+        name: namePrefix + "Params[" + rowId + "]",
+        class: "block enterText",
+        placeHolder: "Param"
     });
-
     let newInputUnits = createElement("input", {
         class: "block enterText",
         placeHolder: "Units",

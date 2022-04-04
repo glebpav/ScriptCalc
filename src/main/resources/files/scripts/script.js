@@ -12,7 +12,6 @@ function loadScriptData() {
         dataType: 'html',
         data: {},
         success: function (data) {
-            console.log(JSON.parse(data))
             printScript(JSON.parse(data))
         }
     });
@@ -34,12 +33,32 @@ function printScript(scriptData) {
 
 function getInputParamElement(data) {
 
-    let mainBlock = createElement('div', {class: 'row'});
-    let pHiddenId = createElement('div', {hidden: 'true', innerText: data.id});
-    let pName = createElement('p', {style: 'text-align: right', class: 'block', innerText: data.paramName});
-    let pDel = createElement('p', {style: 'width: 40px', class: 'block', innerText: ' = '});
-    let inputValue = createElement('input', {style: 'width: 100px', class: 'block enterTextDown'});
-    let pUnit = createElement('div', {style: 'margin-left: 10px; text-align: left', class: 'block', innerText: data.unit});
+    let mainBlock = createElement('div', {
+        class: 'row'
+    });
+    let pHiddenId = createElement('div', {
+        hidden: 'true',
+        innerText: data.id
+    });
+    let pName = createElement('p', {
+        style: 'text-align: right',
+        class: 'block',
+        innerText: data.paramName
+    });
+    let pDel = createElement('p', {
+        style: 'width: 40px',
+        class: 'block',
+        innerText: ' = '
+    });
+    let inputValue = createElement('input', {
+        style: 'width: 100px',
+        class: 'block enterTextDown'
+    });
+    let pUnit = createElement('div', {
+        style: 'margin-left: 10px; text-align: left',
+        innerText: data.unit,
+        class: 'block'
+    });
 
     mainBlock.appendChild(pName);
     mainBlock.appendChild(pHiddenId);
@@ -58,38 +77,35 @@ function getOutputParamElement(param) {
     let paramUnitsEl
     let paramEqualEl
 
-    paramHolderEl = document.createElement("div");
-    paramHolderEl.setAttribute("class", "row");
+    paramHolderEl = createElement("div", {
+        class: "row"
+    });
 
-    /*
-    paramInputEl = document.createElement("p");
-    paramInputEl.setAttribute("style", "text-align: left");
-    // paramInputEl.setAttribute("class", "block");
-    paramInputEl.innerHTML = param.paramName;
-     */
+    paramNameEl = createElement("p", {
+        style: "text-align: right",
+        class: "block",
+        innerText: param.paramName
+    });
 
-    paramNameEl = document.createElement("p");
-    paramNameEl.setAttribute("style", "text-align: right");
-    paramNameEl.setAttribute("class", "block");
-    paramNameEl.innerHTML = param.paramName;
+    paramEqualEl = createElement("p", {
+        style: "width: 40px",
+        class: "block",
+        innerText: " = "
+    });
 
-    paramEqualEl = document.createElement("p");
-    paramEqualEl.setAttribute("style", "width: 40px");
-    paramEqualEl.setAttribute("class", "block");
-    paramEqualEl.innerHTML =  " = ";
+    paramValueEl = createElement("input", {
+        style: "width: 100px",
+        class: "block enterTextDown",
+        readOnly: true,
+        value: param.value
+    });
 
-    paramValueEl = document.createElement("input");
-    paramValueEl.setAttribute("style", "width: 100px");
-    paramValueEl.setAttribute("class", "block enterTextDown");
-    paramValueEl.setAttribute("readonly", "");
-    paramValueEl.setAttribute("value", param.value);
+    paramUnitsEl = createElement("p", {
+        style: "text-align: left; margin-left: 10px",
+        class: "block",
+        innerText: param.unit
+    });
 
-    paramUnitsEl = document.createElement("p");
-    paramUnitsEl.setAttribute("style", "text-align: left; margin-left: 10px");
-    paramUnitsEl.setAttribute("class", "block");
-    paramUnitsEl.innerHTML = param.unit;
-
-    // paramHolderEl.appendChild(paramInputEl)
     paramHolderEl.appendChild(paramNameEl)
     paramHolderEl.appendChild(paramEqualEl)
     paramHolderEl.appendChild(paramValueEl)
@@ -140,7 +156,6 @@ function btnCalculate() {
         },
         success: function (data) {
 
-            console.log(JSON.parse(data));
             printOutputParams(JSON.parse(data), inputsStr);
 
         }
@@ -159,7 +174,11 @@ function printOutputParams(inputData, inputInfo) {
 
     if (!alreadyCalculated) {
 
-        let titleOutput = createElement("p", {style: "text-align: left; margin-left: 220px", innerText: "Output params"});
+        let titleOutput = createElement("p", {
+            style: "text-align: left; margin-left: 220px",
+            innerText: "Output params"
+        });
+
         rootPlaceHolder.appendChild(titleOutput)
 
     }

@@ -16,10 +16,7 @@ function onLogIn() {
         error: function (xhr, status, message) {
             alert(message)
         },
-        success: function (output, status, xhr) {
-
-            console.log(xhr.getResponseHeader('Set-Cookie'))
-            console.log(xhr)
+        success: function (output) {
 
             let response = JSON.parse(output);
             let user = response.user;

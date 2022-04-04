@@ -10,7 +10,6 @@ function registerUser() {
     let password = document.getElementById("inputPassword").value
     let password2 = document.getElementById("inputPassword2").value
 
-
     if (password !== password2) {
         alert("Passwords are not the same")
         return 0
@@ -35,15 +34,6 @@ function registerUser() {
             alert(message);
         },
         success: function (data) {
-            console.log(data);
-
-            /*
-            let response = JSON.parse(data)
-            let user = response.user
-
-            saveToken(response.token)
-            saveUser(user)
-            */
             window.location.href = "/authorisation.html"
         },
     });
