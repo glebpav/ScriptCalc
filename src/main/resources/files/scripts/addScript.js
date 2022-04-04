@@ -82,3 +82,7 @@ function onMakeScript() {
     });
 
 }
+
+function onHome() {
+    window.location.href= "/home.html";
+}

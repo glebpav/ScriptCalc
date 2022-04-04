@@ -114,6 +114,38 @@ function getOutputParamElement(param) {
     return paramHolderEl
 }
 
+function printOutputParams(inputData, inputInfo) {
+
+    if (inputData.length === 0) {
+        alert("Error: empty response!");
+        return
+    }
+
+    let rootPlaceHolder = document.getElementById("palaceHolder")
+
+    if (!alreadyCalculated) {
+
+        let titleOutput = createElement("p", {
+            style: "text-align: left; margin-left: 220px",
+            innerText: "Output params",
+            class: "subHeaders"
+        });
+
+        rootPlaceHolder.appendChild(titleOutput)
+
+    }
+
+    alreadyCalculated = true
+
+    let paramInputEl = createElement("p", {innerText: inputInfo});
+    rootPlaceHolder.appendChild(paramInputEl)
+
+    for (let i = 0; i < inputData.length; i++) {
+        rootPlaceHolder.appendChild(getOutputParamElement(inputData[i]))
+    }
+
+}
+
 function btnCalculate() {
 
     let inputs = document.getElementById("allInputsParams").getElementsByClassName("row");
@@ -163,33 +195,6 @@ function btnCalculate() {
 
 }
 
-function printOutputParams(inputData, inputInfo) {
-
-    if (inputData.length === 0) {
-        alert("Error: empty response!");
-        return
-    }
-
-    let rootPlaceHolder = document.getElementById("palaceHolder")
-
-    if (!alreadyCalculated) {
-
-        let titleOutput = createElement("p", {
-            style: "text-align: left; margin-left: 220px",
-            innerText: "Output params"
-        });
-
-        rootPlaceHolder.appendChild(titleOutput)
-
-    }
-
-    alreadyCalculated = true
-
-    let paramInputEl = createElement("p", {innerText: inputInfo});
-    rootPlaceHolder.appendChild(paramInputEl)
-
-    for (let i = 0; i < inputData.length; i++) {
-        rootPlaceHolder.appendChild(getOutputParamElement(inputData[i]))
-    }
-
+function onHome() {
+    window.location.href = "home.html";
 }

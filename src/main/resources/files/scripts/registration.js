@@ -1,8 +1,4 @@
 
-function btnBackClicked() {
-    window.location.replace("/greeting.html");
-}
-
 function registerUser() {
 
     let login = document.getElementById("inputLogin").value
@@ -37,4 +33,8 @@ function registerUser() {
             window.location.href = "/authorisation.html"
         },
     });
+}
+
+function onHome() {
+    window.location.href = "/greeting.html";
 }

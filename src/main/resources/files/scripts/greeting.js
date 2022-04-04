@@ -1,12 +1,12 @@
 function guestClicked() {
     saveToken(undefined)
-    window.location.replace("/home.html")
+    window.location.href = "/home.html";
 }
 
 function authorisationClicked() {
-    window.location.replace("/authorisation.html");
+    window.location.href = "/authorisation.html";
 }
 
 function registrationClicked() {
-    window.location.replace("/registration.html");
+    window.location = "/registration.html";
 }

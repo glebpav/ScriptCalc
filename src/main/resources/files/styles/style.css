@@ -67,6 +67,14 @@ input[type=file]::file-selector-button {
     padding: 5px;
 }
 
+.headers {
+    font-size: 45px;
+}
+
+.subHeaders {
+    font-size: 25px;
+}
+
 ::placeholder { /* Most modern browsers support this now. */
     color: #9e9e9e;
 }
@@ -257,6 +265,17 @@ input[type=file]::file-selector-button {
 
 .div-floating {
     overflow: hidden;
+}
+
+.relativeBox {
+    position: relative;
+}
+
+.absoluteBackButton {
+    position: absolute;
+    margin-left: 40px;
+    margin-top: 25px;
+    left: 0;
 }
 
 

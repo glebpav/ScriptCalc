@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Registration</title>
 
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2995/2995870.png">
     <link rel="stylesheet" href="../styles/style.css">
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Varela+Round" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -19,7 +20,15 @@
 <body class="mainDiv container" >
 <div align="middle" class="center" >
     <div style="width: 500px" class="card">
-        <h1>Registration</h1>
+
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
+             class="bi bi-arrow-left absoluteBackButton" style="margin-top: 40px; margin-left: 60px;"
+             viewBox="0 0 16 16" onclick="onHome()">
+            <path fill-rule="evenodd"
+                  d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+        </svg>
+
+        <h1 class="headers" >Registration</h1>
 
         <div style="height: 42px;" class="row">
             <p class="block titles" style="text-align: right; width: 160px">Name</p>
@@ -48,6 +57,5 @@
         <button id="regButton" class="btn-grad" onclick="registerUser()">Create user</button>
     </div>
 </div>
-<button onclick="btnBackClicked()" style="width:30px; height:30px; padding:0; cursor: pointer" class="addBtn leftTopCornered"><i class="fa fa-home"></i></button>
 </body>
 </html>

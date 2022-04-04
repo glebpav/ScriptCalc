@@ -29,6 +29,6 @@ function onLogIn() {
     });
 }
 
-function btnBackClicked() {
-    window.location.replace("/greeting.html");
+function onHome() {
+    window.location.href = "/greeting.html"
 }
