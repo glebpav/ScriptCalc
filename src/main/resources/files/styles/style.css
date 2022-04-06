@@ -16,8 +16,8 @@ body {
     margin-top: 10px;
     text-align: center;
     background: #e0e5ff;
-    width: 800px;
-    padding: 20px;
+    width: 1000px;
+    padding: 40px;
     border-radius: 50px;
     background: #e0e5ff;
     box-shadow: 20px 20px 60px #bec3d9, -20px -20px 60px #ffffff;
@@ -231,11 +231,17 @@ input[type=file]::file-selector-button {
     margin: 10px;
 }
 
+.bottomGraved {
+    position: absolute;
+    bottom: 0;
+}
+
 
 .goToScriptBtn {
     width: 100px;
     height: 25px;
 
+    margin-bottom: 10px;
     border: 0px;
     color: #002148;
     cursor: pointer;
@@ -247,10 +253,9 @@ input[type=file]::file-selector-button {
 }
 
 .scriptCard {
-    width: 250px;
-    height: 140px;
-    justify-content: space-between;
-    float: left;
+    min-height: 140px;
+    padding-left: 10px;
+    padding-right: 10px;
 
     margin: 10px;
     border-radius: 10px;
@@ -260,7 +265,7 @@ input[type=file]::file-selector-button {
 }
 
 .rowWithSpace {
-    display: block;
+    display: inline-block;
 }
 
 .div-floating {
@@ -278,5 +283,17 @@ input[type=file]::file-selector-button {
     left: 0;
 }
 
+
+
+.wrapper {
+    display: grid;
+    grid-template-rows: 2fr 2fr 1fr;
+}
+
+.horizontalWrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    alignment: center;
+}
 
 

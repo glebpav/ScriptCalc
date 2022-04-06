@@ -27,7 +27,7 @@ function loadAllScripts() {
 
 function printScripts(scriptsArray) {
 
-    let placeHolder = document.getElementById("IdScriptHolder ")
+    let placeHolder = document.getElementById("IdScriptHolder")
 
     let horizontalDivArray = [];
     let goToScriptBtn;
@@ -68,22 +68,23 @@ function printScripts(scriptsArray) {
     }
 
     let buf = 0;
-    rowDiv = createElement("div", {class: "row div-floating"});
+    rowDiv = createElement("div", {class: "row horizontalWrapper"});
     for (let i = 0; i < horizontalDivArray.length; i += 1) {
-        /*
+
         if (buf < 2 && i !== horizontalDivArray.length - 1) rowDiv.appendChild(horizontalDivArray[i]);
         else {
             rowDiv.appendChild(horizontalDivArray[i])
             placeHolder.appendChild(rowDiv)
-            rowDiv = createElement("div", {class: "row div-floating"});
+            rowDiv = createElement("div", {class: "row horizontalWrapper"});
             buf = -1
         }
         buf += 1
 
-         */
-        placeHolder.appendChild(horizontalDivArray[i])
+        // placeHolder.appendChild(horizontalDivArray[i])
     }
-
+    /*for (let i = 0 ; i < rowDiv.length; i++) {
+    }*/
+    // placeHolder.appendChild(rowDiv)
 }
 
 function onAddNewScript() {
