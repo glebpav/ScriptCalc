@@ -51,7 +51,9 @@ fun Application.configureRouting() {
             val login = params["login"] ?: ""
             val password = params["password"] ?: ""
             val name = params["name"] ?: ""
+            val inviteCode = params["invitecode"] ?: ""
             try {
+                if(inviteCode != File("invitecode.txt").readText().trim()) throw Exception("Wrong invite code")
                 DbController.createUser(login, password, name)
                 call.response.status(HttpStatusCode.OK)
             } catch (e: Exception) {
