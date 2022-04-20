@@ -5,7 +5,6 @@ function registerUser() {
     let name = document.getElementById("inputName").value
     let password = document.getElementById("inputPassword").value
     let password2 = document.getElementById("inputPassword2").value
-    let inviteCode = document.getElementById("invitecode").value
 
     if (password !== password2) {
         alert("Passwords are not the same")
@@ -24,7 +23,6 @@ function registerUser() {
             "login": login,
             "password": password,
             "name": name,
-            "invitecode": inviteCode
         },
         error: function (xhr, status, message) {
             document.getElementById("regButton").enabled = true
