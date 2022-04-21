@@ -7,7 +7,7 @@ import com.example.models.Param
 import com.example.models.Script
 
 fun main() {
-    embeddedServer(Netty, port = 8080, host = "0.0.0.0") {
+    embeddedServer(Netty, port = 8080, host = "localhost") {
         configureRouting()
         configureTemplating()
         configureSerialization()

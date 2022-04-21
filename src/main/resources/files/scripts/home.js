@@ -42,7 +42,7 @@ function printScripts(scriptsArray) {
     for (let i = 0; i < scriptsArray.length; i++) {
 
         scriptId = scriptsArray[i].id
-        textOfDesc = scriptsArray[i].description
+        textOfDesc = scriptsArray[i].description.length === 0 ? " - " : scriptsArray[i].description
 
         cardDiv = createElement('div', {
             class: 'rowWithSpace scriptCard'
@@ -51,7 +51,7 @@ function printScripts(scriptsArray) {
             innerText: scriptsArray[i].name
         });
         descP = createElement("p", {
-            innerText: (textOfDesc.length > 50) ? textOfDesc.substring(0, 50) : textOfDesc,
+            innerText: (textOfDesc.length > 50) ? textOfDesc.substring(0, 50) + "..." : textOfDesc,
             style: "font-size: 0.9em;"
         });
         goToScriptBtn = createElement("button", {

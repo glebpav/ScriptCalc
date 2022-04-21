@@ -126,6 +126,7 @@ function printOutputParams(inputData, inputInfo) {
     if (!alreadyCalculated) {
 
         let titleOutput = createElement("p", {
+            id: "titleOutput",
             style: "text-align: left; margin-left: 220px",
             innerText: "Output params",
             class: "subHeaders"
@@ -138,11 +139,16 @@ function printOutputParams(inputData, inputInfo) {
     alreadyCalculated = true
 
     let paramInputEl = createElement("p", {innerText: inputInfo});
-    rootPlaceHolder.appendChild(paramInputEl)
+    // rootPlaceHolder.appendChild(paramInputEl)
+    insertAfter(document.getElementById("titleOutput"), paramInputEl);
 
+    let bufDiv = createElement("div")
     for (let i = 0; i < inputData.length; i++) {
-        rootPlaceHolder.appendChild(getOutputParamElement(inputData[i]))
+        // rootPlaceHolder.appendChild(getOutputParamElement(inputData[i]))
+        bufDiv.appendChild(getOutputParamElement(inputData[i]));
     }
+
+    insertAfter(paramInputEl, bufDiv);
 
 }
 
