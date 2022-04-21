@@ -14,7 +14,7 @@
             crossorigin="anonymous"></script>
     <script src="../scripts/home.js"></script>
     <script src="../scripts/utils.js"></script>
-
+    <script src="../scripts/script.js"></script>
 </head>
 <body class="mainDiv">
 <div style="height: 100%" align="middle">
@@ -26,10 +26,32 @@
 
         <div id="loadingCaption" class="subHeaders">Loading...</div>
 
-        <!-- <div id="IdScriptHolder " class="div-floating"></div> -->
-        <div id="IdScriptHolder" style="margin-left: 5%; margin-right: 5%" ></div>
-
         <button id="btnAddNewScript" class="btn-grad" onclick="onAddNewScript()">Add new</button>
+
+        <!-- <div id="IdScriptHolder " class="div-floating"></div> -->
+        <div id="IdScriptHolder" style="margin-left: 5%; margin-right: 5%" >
+            <div id="tabsWrapper">
+
+            </div>
+            <div id="tabWrapper">
+                <div class="card container" align="middle">
+
+                    <h1 id="scriptNameID" class="headers" style="margin-top: 20px"></h1>
+                    <p id="scriptDescriptionID" style="margin-top: 10px"></p>
+
+                    <div id="palaceHolder" style="margin-top: 40px">
+
+                        <p style="text-align: left; margin-left: 220px" class="subHeaders">Input params</p>
+                        <div id="allInputsParams" ></div>
+                        <button style="margin-top: 30px" class="btn-grad" onclick="btnCalculate()">calculate</button>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
 
     </div>
 </div>
