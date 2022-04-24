@@ -22,19 +22,17 @@
 
         <h1 id="greetingTitleId" class="headers"></h1>
 
-        <p style="margin-top: 20px; text-align: left; margin-left: 60px;" class="subHeaders"> Library of Scripts</p>
-
         <div id="loadingCaption" class="subHeaders">Loading...</div>
 
         <button id="btnAddNewScript" class="btn-grad" onclick="onAddNewScript()">Add new</button>
 
         <!-- <div id="IdScriptHolder " class="div-floating"></div> -->
-        <div id="IdScriptHolder" style="margin-left: 5%; margin-right: 5%" >
+        <div id="IdScriptHolder" style="margin-left: 5%; margin-right: 5%">
             <div id="tabsWrapper">
 
             </div>
             <div id="tabWrapper">
-                <div class="card container" align="middle">
+                <div class="specialCard container" align="middle">
 
                     <h1 id="scriptNameID" class="headers" style="margin-top: 20px"></h1>
                     <p id="scriptDescriptionID" style="margin-top: 10px"></p>
@@ -42,8 +40,9 @@
                     <div id="palaceHolder" style="margin-top: 40px">
 
                         <p style="text-align: left; margin-left: 220px" class="subHeaders">Input params</p>
-                        <div id="allInputsParams" ></div>
+                        <div id="allInputsParams"></div>
                         <button style="margin-top: 30px" class="btn-grad" onclick="btnCalculate()">calculate</button>
+                        <div id="allOutputParams"></div>
 
                     </div>
 
@@ -52,12 +51,11 @@
         </div>
 
 
-
     </div>
 </div>
 
 <script>setTitle();
-loadAllScripts()</script>
+loadAllScripts();</script>
 
 </body>
 </html>

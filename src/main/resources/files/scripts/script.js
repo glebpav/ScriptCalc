@@ -24,6 +24,9 @@ function printScript(scriptData) {
     document.getElementById("scriptDescriptionID").innerText = scriptData.description;
 
     let paramsPlaceHolder = document.getElementById("allInputsParams");
+    paramsPlaceHolder.innerHTML = "";
+    document.getElementById("allOutputParams").innerHTML= "";
+    alreadyCalculated = false;
 
     for (let i = 0; i < scriptData.inputParams.length; i++) {
         paramsPlaceHolder.appendChild(getInputParamElement(scriptData.inputParams[i]));
@@ -121,7 +124,7 @@ function printOutputParams(inputData, inputInfo) {
         return
     }
 
-    let rootPlaceHolder = document.getElementById("palaceHolder")
+    let rootPlaceHolder = document.getElementById("allOutputParams")
 
     if (!alreadyCalculated) {
 
@@ -150,6 +153,20 @@ function printOutputParams(inputData, inputInfo) {
 
     insertAfter(paramInputEl, bufDiv);
 
+}
+
+function setTabSelected(id) {
+
+
+    let tabs = document.getElementById("tabsWrapper").getElementsByClassName("rowWithSpace");
+
+    for (let i = 0; i < tabs.length; i++) {
+        console.log(tabs[i])
+        tabs[i].className = "rowWithSpace tab";
+        console.log(tabs[i])
+    }
+
+    document.getElementById("tab" + id).className = "rowWithSpace selectedTab";
 }
 
 function btnCalculate() {

@@ -15,9 +15,9 @@ function loadAllScripts() {
         dataType: 'html',
         success: function (data) {
             //hide loading caption
-            document.getElementById("loadingCaption").style.display = "none"
+            document.getElementById("loadingCaption").style.display = "none";
             jsonData = JSON.parse(data);
-            printScripts(jsonData)
+            printScripts(jsonData);
         }
     });
 
@@ -36,28 +36,34 @@ function printScripts(scriptsArray) {
     let titleP;
     let descP;
 
+    let idToShowAsDefault;
     let scriptId;
     let textOfDesc;
 
     tabsWrapper = document.getElementById("tabsWrapper");
     for (let i = 0; i < scriptsArray.length; i++) {
 
-        scriptId = scriptsArray[i].id
-        textOfDesc = scriptsArray[i].description.length === 0 ? " - " : scriptsArray[i].description
+        scriptId = scriptsArray[i].id;
+        if (i === 0) idToShowAsDefault = scriptId;
+        textOfDesc = scriptsArray[i].description.length === 0 ? " - " : scriptsArray[i].description;
 
         cardDiv = createElement('div', {
             class: 'rowWithSpace scriptCard',
             onclick: "goToScript(" + scriptId + ")",
+            id: "tab" + scriptId,
             title: textOfDesc
         });
         titleP = createElement("h3", {
             innerText: scriptsArray[i].name
         });
 
-        cardDiv.appendChild(titleP)
-        tabsWrapper.appendChild(cardDiv)
+        cardDiv.appendChild(titleP);
+        tabsWrapper.appendChild(cardDiv);
 
     }
+
+    goToScript(idToShowAsDefault);
+
 }
 
 function onAddNewScript() {
@@ -66,5 +72,6 @@ function onAddNewScript() {
 
 function goToScript(scriptID) {
     saveScriptId(scriptID);
-    loadScriptData()
+    setTabSelected(scriptID);
+    loadScriptData();
 }
