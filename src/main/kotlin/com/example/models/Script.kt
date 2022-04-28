@@ -11,5 +11,6 @@ data class Script(
     val description: String,
     val inputParams: List<Param>,
     val outputParams: List<Param>,
-    @Transient val path: String = ""
+    @Transient val path: String = "",
+    val type: String
 )

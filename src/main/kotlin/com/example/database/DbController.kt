@@ -102,11 +102,12 @@ object DbController {
         connection.close()
     }
 
-    fun getAllScripts(): List<Script> {
+    fun getAllScripts(type: String): List<Script> {
         Class.forName("com.mysql.cj.jdbc.Driver")
         val connection = DriverManager.getConnection("jdbc:mysql://$dbHost/$dbName", dbUser, dbPass)
-        val sql = "SELECT * FROM Scripts;"
+        val sql = "SELECT * FROM Scripts WHERE type = ?;"
         val stmt = connection.prepareStatement(sql)
+        stmt.setString(1, type)
         val result = stmt.executeQuery()
         val output = mutableListOf<Script>()
         while (result.next()) {
@@ -115,6 +116,7 @@ object DbController {
             val _getScriptName = result.getString(3)
             val _getScriptDescription = result.getString(4)
             val _getScriptPath = result.getString(5)
+            val _getScriptType = result.getString(6)
             val _getScriptParams = getScriptParams(_getScriptID)
             output.add(
                 Script(
@@ -124,13 +126,15 @@ object DbController {
                     _getScriptDescription,
                     _getScriptParams.filter { it.type == "input" },
                     _getScriptParams.filter { it.type == "output" },
-                    _getScriptPath
+                    _getScriptPath,
+                    _getScriptType
                 )
             )
         }
         connection.close()
         return output.toList()
     }
+
 
     fun getScriptByID(id: Int): Script? {
         Class.forName("com.mysql.cj.jdbc.Driver")
@@ -146,6 +150,7 @@ object DbController {
             val _getScriptName = result.getString(3)
             val _getScriptDescription = result.getString(4)
             val _getScriptPath = result.getString(5)
+            val _getScriptType = result.getString(6)
             val _getScriptParams = getScriptParams(_getScriptID)
             output = Script(
                     _getScriptID,
@@ -154,7 +159,8 @@ object DbController {
                     _getScriptDescription,
                     _getScriptParams.filter { it.type == "input" },
                     _getScriptParams.filter { it.type == "output" },
-                    _getScriptPath
+                    _getScriptPath,
+                    _getScriptType
                 )
         }
         connection.close()

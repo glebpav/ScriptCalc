@@ -164,15 +164,16 @@ fun Application.configureRouting() {
             }
         }
 
-        get("script/loadAll") {
+        get("script/loadAllExecutable") {
 
-            val token = call.request.queryParameters["token"] ?: return@get call.respondText(
-                "You are not logged in",
-                status = HttpStatusCode.BadRequest
-            )
+            val scripts = DbController.getAllScripts("executable")
+            call.respond(scripts)
 
-            val scripts = DbController.getAllScripts()
+        }
 
+        get("script/loadAllServiced") {
+
+            val scripts = DbController.getAllScripts("serviced")
             call.respond(scripts)
 
         }
@@ -215,6 +216,7 @@ fun Application.configureRouting() {
                 call.response.status(HttpStatusCode(400, e.message.toString()))
             }
         }
+
 
     }
 
