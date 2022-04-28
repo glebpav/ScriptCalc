@@ -18,26 +18,41 @@
 <div align="center" class="center">
     <div class="card" style="width: 1200px;">
 
-        <h1 class="headers" >Calculating helper for physics and not only...</h1>
+        <h1 class="headers">Calculating helper for physics and not only...</h1>
 
-        <button class="addBtn" style="font-size: 20px; width: 150px; margin-right: 5px;"
-                onclick="authorisationClicked()">Authorisation
+        <button class="addBtn" style="font-size: 20px; width: 150px; margin-bottom: 5px;">
+
+            <p onclick="guestClicked()"
+               style="cursor: pointer; margin: auto">
+
+                <svg xmlns="http://www.w3.org/2000/svg" style="display:inline-block; vertical-align:middle" width="24"
+                     height="24" fill="currentColor" class="bi bi-eyeglasses"
+                     viewBox="0 0 16 16">
+                    <path d="M4 6a2 2 0 1 1 0 4 2 2 0 0 1 0-4zm2.625.547a3 3 0 0 0-5.584.953H.5a.5.5 0 0 0 0 1h.541A3 3 0 0 0 7 8a1 1 0 0 1 2 0 3 3 0 0 0 5.959.5h.541a.5.5 0 0 0 0-1h-.541a3 3 0 0 0-5.584-.953A1.993 1.993 0 0 0 8 6c-.532 0-1.016.208-1.375.547zM14 8a2 2 0 1 1-4 0 2 2 0 0 1 4 0z"/>
+                </svg>
+
+                Continue
+            </p>
+
         </button>
 
-        <button class="addBtn" style="font-size: 20px; width: 150px; margin-left: 5px;" onclick="registrationClicked()">
-            Registration
-        </button>
+        <br>
 
-        <p onclick="guestClicked()" style="cursor: pointer; font-size: 20px; color: #696969;">
+        <div class="row">
+            <p class="block" style="font-size: 20px; width: 150px; color: #696969; cursor: pointer;"
+               onclick="authorisationClicked()">
+                Authorisation
+            </p>
 
-            <svg xmlns="http://www.w3.org/2000/svg" style="display:inline-block; vertical-align:middle" width="24"
-                 height="24" fill="currentColor" class="bi bi-eyeglasses"
-                 viewBox="0 0 16 16">
-                <path d="M4 6a2 2 0 1 1 0 4 2 2 0 0 1 0-4zm2.625.547a3 3 0 0 0-5.584.953H.5a.5.5 0 0 0 0 1h.541A3 3 0 0 0 7 8a1 1 0 0 1 2 0 3 3 0 0 0 5.959.5h.541a.5.5 0 0 0 0-1h-.541a3 3 0 0 0-5.584-.953A1.993 1.993 0 0 0 8 6c-.532 0-1.016.208-1.375.547zM14 8a2 2 0 1 1-4 0 2 2 0 0 1 4 0z"/>
-            </svg>
+            <p class="block" style="width: 40px">
+                /
+            </p>
 
-            Continue as guest
-        </p>
+            <p class="block" style=" font-size: 20px; width: 150px; color: #696969; cursor: pointer;"
+               onclick="registrationClicked()">
+                Registration
+            </p>
+        </div>
 
     </div>
 </div>

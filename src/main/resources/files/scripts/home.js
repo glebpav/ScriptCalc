@@ -1,6 +1,14 @@
 function setTitle() {
-    if (loadUser() != null)
-        document.getElementById("greetingTitleId").innerText = "Hello, " + loadUser().name
+
+    let loadedUser = loadUser().name;
+    let greetingLabel;
+
+    if (loadedUser != null)
+        greetingLabel = "Hello, " + loadUser().name;
+    else
+       greetingLabel = "Hello, dear engineer";
+
+    document.getElementById("greetingTitleId").innerText = greetingLabel;
 }
 
 function loadAllScripts() {

@@ -1,5 +1,6 @@
 function guestClicked() {
     saveToken(undefined)
+    saveUser("")
     window.location.href = "/home.html";
 }
 
