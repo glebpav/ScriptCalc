@@ -8,6 +8,120 @@ $("#files").change(function () {
     console.log(filename);
 });
 
+function appendScriptElements(parentElement, data) {
+
+    for (let i = 0; i < data.length; i++) {
+
+        let scriptContainer = createElement("div", {
+            class: "row",
+            align: "left",
+        })
+        let scriptName = createElement("p", {
+            class: "block",
+            style: "width: 90%; text-align: left;",
+            innerText: data[i].name,
+            onclick: "",
+        })
+        let delIcon = createElement("span", {
+            style: "align-items: center",
+            class: "material-icons",
+            innerText: "clear",
+        });
+
+        scriptContainer.appendChild(scriptName);
+        scriptContainer.appendChild(delIcon);
+
+        parentElement.appendChild(scriptContainer);
+    }
+
+}
+
+function showScripts(data, type) {
+
+    console.log(data, type);
+
+    let scriptHolder;
+
+    if (type === "exe") {
+
+        scriptHolder = document.getElementById("exeScriptsHolder");
+        appendScriptElements(scriptHolder, data);
+
+    } else if (type === "ser") {
+
+        scriptHolder = document.getElementById("serScriptsHolder");
+        appendScriptElements(scriptHolder, data);
+
+    }
+
+}
+
+function getExecutableScripts() {
+
+    let token = loadToken();
+
+    $.ajax({
+        type: "GET",
+        url: '/script/loadAllExecutable?token=' + token,
+        cache: false,
+        dataType: 'html',
+        success: function (data) {
+            let jsonData = JSON.parse(data );
+            showScripts(jsonData, "exe");
+        }
+    });
+
+}
+
+function getServicedScripts() {
+
+    let token = loadToken();
+
+    $.ajax({
+        type: "GET",
+        url: '/script/loadAllServiced?token=' + token,
+        cache: false,
+        dataType: 'html',
+        success: function (data) {
+            let jsonData = JSON.parse(data);
+            showScripts(jsonData, "ser");
+        }
+    });
+
+}
+
+
+function getAvailableScriptViewer() {
+
+    let placeHolder = createElement("div", {
+        id: "scriptsHolder",
+        style: "padding-left: 30px; padding-right: 30px",
+    });
+
+    let exeScriptsHeader = createElement("h3", {
+        innerText: "Executable scripts:",
+        style: "text-align: left;",
+    })
+    let serScriptsHeader = createElement("h3", {
+        innerText: "Serviced scripts:",
+        style: "text-align: left;",
+    })
+    let exeScriptsContainer = createElement("div", {
+        id: "exeScriptsHolder",
+        style: "align"
+    });
+    let serScriptsContainer = createElement("div", {
+        id: "serScriptsHolder",
+    });
+
+    placeHolder.appendChild(exeScriptsHeader);
+    placeHolder.appendChild(exeScriptsContainer);
+    placeHolder.appendChild(serScriptsHeader);
+    placeHolder.appendChild(serScriptsContainer);
+
+    return placeHolder;
+}
+
 function addMore(type) {
 
     let namePrefix = (type === "inp") ? "input" : "output";
@@ -80,6 +194,33 @@ function onMakeScript() {
             alert(message);
         }
     });
+
+}
+
+function onTabClicked(tabId) {
+
+    let tab0 = document.getElementById("availableScriptsTab");
+    let tab1 = document.getElementById("addNewScriptTab");
+    let tabContent = document.getElementById("tabWrapper");
+
+    if(tabId === 0) {
+
+        tab0.className = "rowWithSpace selectedTab";
+        tab1.className = "rowWithSpace tab";
+
+        tabContent.innerHTML = getAvailableScriptViewer().outerHTML;
+
+        getExecutableScripts();
+        getServicedScripts();
+
+    } else if (tabId === 1) {
+
+        tab0.className = "rowWithSpace tab";
+        tab1.className = "rowWithSpace selectedTab";
+
+        tabContent.innerHTML = addScriptFormBlock;
+
+    }
 
 }
 
