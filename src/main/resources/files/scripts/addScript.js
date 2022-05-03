@@ -8,29 +8,29 @@ $("#files").change(function () {
     console.log(filename);
 });
 
-function appendScriptElements(parentElement, data) {
+function appendScriptElements(parentElement, data, type) {
 
     for (let i = 0; i < data.length; i++) {
 
         let scriptContainer = createElement("div", {
-            class: "row",
+            class: "verticalScriptListItem",
+            style: "cursor: pointer; text-align: center; display: flex; flex-flow: row wrap; ",
             align: "left",
         })
         let scriptName = createElement("p", {
-            class: "block",
-            style: "width: 90%; text-align: left;",
-            innerText: data[i].name,
-            onclick: "",
+            class: "rowWithSpace",
+            style: "height: 38px; width: 90%; text-align: left; margin-left: 30px; margin-top: 8px;",
+            innerText: "- " + data[i].name,
+            onclick: (type === "exe") ? "onExeScriptClicked(" + JSON.stringify(data[i]) + ")" : "",
         })
         let delIcon = createElement("span", {
-            style: "align-items: center",
-            class: "material-icons",
+            style: "width: 6%; margin-top: 8px; ",
+            class: "rowWithSpace material-icons",
             innerText: "clear",
         });
 
         scriptContainer.appendChild(scriptName);
         scriptContainer.appendChild(delIcon);
-
         parentElement.appendChild(scriptContainer);
     }
 
@@ -38,19 +38,17 @@ function appendScriptElements(parentElement, data) {
 
 function showScripts(data, type) {
 
-    console.log(data, type);
-
     let scriptHolder;
 
     if (type === "exe") {
 
         scriptHolder = document.getElementById("exeScriptsHolder");
-        appendScriptElements(scriptHolder, data);
+        appendScriptElements(scriptHolder, data, type);
 
     } else if (type === "ser") {
 
         scriptHolder = document.getElementById("serScriptsHolder");
-        appendScriptElements(scriptHolder, data);
+        appendScriptElements(scriptHolder, data, type);
 
     }
 
@@ -66,7 +64,7 @@ function getExecutableScripts() {
         cache: false,
         dataType: 'html',
         success: function (data) {
-            let jsonData = JSON.parse(data );
+            let jsonData = JSON.parse(data);
             showScripts(jsonData, "exe");
         }
     });
@@ -90,7 +88,6 @@ function getServicedScripts() {
 
 }
 
-
 function getAvailableScriptViewer() {
 
     let placeHolder = createElement("div", {
@@ -113,8 +110,13 @@ function getAvailableScriptViewer() {
     let serScriptsContainer = createElement("div", {
         id: "serScriptsHolder",
     });
+    let tipToExeScripts = createElement("p", {
+        style: "text-align: left",
+        innerText: "Tip: you can press any exe script to refactor its settings"
+    });
 
     placeHolder.appendChild(exeScriptsHeader);
+    placeHolder.appendChild(tipToExeScripts);
     placeHolder.appendChild(exeScriptsContainer);
     placeHolder.appendChild(serScriptsHeader);
     placeHolder.appendChild(serScriptsContainer);
@@ -122,7 +124,9 @@ function getAvailableScriptViewer() {
     return placeHolder;
 }
 
-function addMore(type) {
+// listeners
+
+function onAddMoreParams(type, name = "", units = "") {
 
     let namePrefix = (type === "inp") ? "input" : "output";
     let rowId = (type === "inp") ? ++countOfInputParams : ++countOfOutputParams;
@@ -140,13 +144,16 @@ function addMore(type) {
         style: "width: 40px; margin-left: 5px"
     });
 
+    if (name !== "") newInput.value = name;
+    if (units !== "") newInputUnits.value = units;
+
     newDiv.appendChild(newInput);
     newDiv.appendChild(newInputUnits);
 
     document.getElementById(namePrefix + "Params").appendChild(newDiv);
 }
 
-function delLast(pref) {
+function onDelLastParam(pref) {
 
     let prefix;
 
@@ -203,7 +210,7 @@ function onTabClicked(tabId) {
     let tab1 = document.getElementById("addNewScriptTab");
     let tabContent = document.getElementById("tabWrapper");
 
-    if(tabId === 0) {
+    if (tabId === 0) {
 
         tab0.className = "rowWithSpace selectedTab";
         tab1.className = "rowWithSpace tab";
@@ -224,6 +231,41 @@ function onTabClicked(tabId) {
 
 }
 
-function onHome() {
-    window.location.href= "/home.html";
+function onExeScriptClicked(scriptData) {
+
+    onTabClicked(1);
+    console.log(scriptData)
+
+    document.getElementById("scriptName").value = scriptData.name;
+    document.getElementById("scriptDescription").value = scriptData.description;
+
+    console.log(scriptData.inputParams);
+    console.log(scriptData.outputParams);
+
+    countOfInputParams = 0;
+    countOfOutputParams = 0;
+
+    document.getElementById("inputParams").innerHTML = "";
+    for (let i = 0; i < scriptData.inputParams.length; i++) {
+        onAddMoreParams(
+            "inp",
+            scriptData.inputParams[i].paramName,
+            scriptData.inputParams[i].unit
+        );
+    }
+
+    document.getElementById("outputParams").innerHTML = "";
+    for (let i = 0; i < scriptData.outputParams.length; i++) {
+        onAddMoreParams(
+            "out",
+            scriptData.outputParams[i].paramName,
+            scriptData.outputParams[i].unit
+        );
+    }
+
+
+}
+
+function onReturnHome() {
+    window.location.href = "/home.html";
 }

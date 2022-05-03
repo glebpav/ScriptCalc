@@ -16,9 +16,9 @@ let addScriptFormBlock = `
 
             <hr style="width: 160px; background: #e0e5ff"/>
 
-            <button id="btnAddMoreInpParams" class="addBtn" onclick="addMore(&quot;inp&quot;); return false;">Add more
+            <button id="btnAddMoreInpParams" class="addBtn" onclick="onAddMoreParams(&quot;inp&quot;); return false;">Add more
             </button>
-            <button id="btnDelLastInpParams" class="delBtn" onclick="delLast(&quot;inp&quot;); return false;">del
+            <button id="btnDelLastInpParams" class="delBtn" onclick="onDelLastParam(&quot;inp&quot;); return false;">del
             </button>
 
             <p class="titles" align="middle" style="margin-top: 30px;">Output params</p>
@@ -32,9 +32,9 @@ let addScriptFormBlock = `
 
             <hr style="width: 160px;  background: #e0e5ff"/>
 
-            <button id="btnAddMoreOutParams" class="addBtn" onclick="addMore(&quot;out&quot;); return false;">Add more
+            <button id="btnAddMoreOutParams" class="addBtn" onclick="onAddMoreParams(&quot;out&quot;); return false;">Add more
             </button>
-            <button id="btnDelLastOutParams" class="delBtn" onclick="delLast(&quot;out&quot;); return false;">del
+            <button id="btnDelLastOutParams" class="delBtn" onclick="onDelLastParam(&quot;out&quot;); return false;">del
             </button>
             <br>
 
