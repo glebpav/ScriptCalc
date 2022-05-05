@@ -153,7 +153,6 @@ input[type=file]::file-selector-button {
 .block {
     width: 100px;
     display: inline-block;
-/ / display inline with ability to provide width / height
 }
 
 .delBtn {
@@ -317,7 +316,7 @@ input[type=file]::file-selector-button {
     -4px -4px 8px #ffffff;
 }
 
-#tabsWrapper {
+.headersRow {
     display: flex;
     flex-flow: row wrap;
 }
@@ -351,6 +350,31 @@ input[type=file]::file-selector-button {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     alignment: center;
+}
+
+.verticalScriptListItem {
+    height: 40px;
+    margin-top: 10px;
+    border-radius: 10px;
+    background: #e0e5ff;
+    box-shadow: inset 4px 4px 8px #afb3c7,
+    inset -4px -4px 8px #ffffff;
+}
+
+.typeSwitcher {
+    height: 30px;
+    border-radius: 10px;
+    background: #e0e5ff;
+    box-shadow:  6px 6px 12px #bec3d9,
+    -6px -6px 12px #ffffff;
+}
+
+.typeSwitcherSelected {
+    height: 30px;
+    border-radius: 10px;
+    background: #e0e5ff;
+    box-shadow: inset 6px 6px 12px #bec3d9,
+    inset -6px -6px 12px #ffffff;
 }
 
 

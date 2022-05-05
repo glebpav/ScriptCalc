@@ -18,7 +18,7 @@ function loadAllScripts() {
 
     $.ajax({
         type: "GET",
-        url: '/script/loadAll?token=' + token,
+        url: '/script/loadAllExecutable?token=' + token,
         cache: false,
         dataType: 'html',
         success: function (data) {
@@ -35,14 +35,9 @@ function loadAllScripts() {
 
 function printScripts(scriptsArray) {
 
-    let placeHolder = document.getElementById("IdScriptHolder")
-
-    let horizontalDivArray = [];
-    let goToScriptBtn;
     let cardDiv;
     let tabsWrapper
     let titleP;
-    let descP;
 
     let idToShowAsDefault;
     let scriptId;
