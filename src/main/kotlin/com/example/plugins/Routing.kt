@@ -223,7 +223,11 @@ fun Application.configureRouting() {
 
         post("script/delete") {
             try {
-                val id = call.request.queryParameters["id"] ?: throw Exception("Empty ID")
+                val params = call.receiveParameters()
+                val id = params["id"] ?: throw Exception("Empty ID")
+                val token = call.request.queryParameters["token"] ?: throw Exception("You are not logged in")
+                val user = Auth.getUserByToken(token) ?: throw Exception("You are not logged in")
+
                 val script = DbController.getScriptByID(id.toInt()) ?: throw Exception("Plugin with this id not found")
 
                 DbController.deleteScript(script.id)

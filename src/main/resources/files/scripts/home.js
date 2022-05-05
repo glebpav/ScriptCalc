@@ -1,9 +1,8 @@
 function setTitle() {
 
-    let loadedUser = loadUser().name;
-    let greetingLabel;
-
-    if (loadedUser != null)
+    let user = loadUser();
+    let greetingLabel = "";
+    if (user != null)
         greetingLabel = "Hello, " + loadUser().name;
     else
        greetingLabel = "Hello, dear engineer";

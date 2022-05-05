@@ -1,6 +1,6 @@
 let addScriptFormBlock = `
             <form onsubmit="onMakeScript(); return false;" enctype="multipart/form-data">
-
+            
             <p class="title">Type of the Script</p>
 
             <div id="IdScriptHolder" style="width: 71%; margin: 0 auto;">
@@ -33,8 +33,8 @@ let addScriptFormBlock = `
         `;
 
 let exeScriptBlock = `
+        <input type="hidden" name="type" value="executable">
         <input id="scriptName" class="enterText" style="margin-top: 40px;" name="name" placeholder="Name of your script">
-        
         <textarea id="scriptDescription" name="description" class="enterText"
               placeholder="Put here your wonderful description"></textarea>
         
@@ -79,7 +79,7 @@ let exeScriptBlock = `
 `
 
 let serScriptBlock = `
-
+        <input type="hidden" name="type" value="serviced">
         <input id="scriptName" class="enterText" style="margin-top: 40px;" name="name" placeholder="Name of your script">
         <textarea id="scriptDescription" name="description" class="enterText"
         placeholder="Put here your wonderful description"></textarea>

@@ -27,13 +27,13 @@ function appendScriptElements(parentElement, data, type) {
             style: "width: 6%; margin-top: 8px; ",
             class: "rowWithSpace material-icons",
             innerText: "clear",
+            onclick: "onDeleteScript("+ data[i].id +")"
         });
 
         scriptContainer.appendChild(scriptName);
         scriptContainer.appendChild(delIcon);
         parentElement.appendChild(scriptContainer);
     }
-
 }
 
 function showScripts(data, type) {
@@ -296,4 +296,19 @@ function onScrTypeClicked(typeId) {
 
     }
 
+}
+
+function onDeleteScript(scriptID) {
+    $.ajax({
+        type: "POST",
+        url: '/script/delete?token=' + loadToken(),
+        cache: false,
+        data: {id: scriptID},
+        success: function (data) {
+            window.location = "addScript.html";
+        },
+        error: function (xhr, status, message) {
+            alert(message);
+        }
+    });
 }
