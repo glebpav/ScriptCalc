@@ -66,17 +66,18 @@ object DbController {
         return output
     }
 
-    fun createFile(creatorID: Int, name: String, description: String, path: String): Int {
+    fun createScript(creatorID: Int, name: String, description: String, path: String, type: String): Int {
         if (name.length !in 3..128) throw Exception("Script name length should be from 3 to 128 characters")
         if (description.length !in 0..65535) throw Exception("Script description length should be from 0 to 65535 characters")
         Class.forName("com.mysql.cj.jdbc.Driver")
         val connection = DriverManager.getConnection("jdbc:mysql://$dbHost/$dbName", dbUser, dbPass)
-        val sql = "INSERT INTO Scripts (creatorID, name, description, path) VALUES (?, ?, ?, ?);"
+        val sql = "INSERT INTO Scripts (creatorID, name, description, path, type) VALUES (?, ?, ?, ?, ?);"
         val stmt = connection.prepareStatement(sql)
         stmt.setInt(1, creatorID)
         stmt.setString(2, name)
         stmt.setString(3, description)
         stmt.setString(4, path)
+        stmt.setString(5, type)
         stmt.execute()
 
         val stmt2 = connection.createStatement()
@@ -87,6 +88,20 @@ object DbController {
         connection.close()
 
         return lastId
+    }
+
+    fun deleteScript(scriptID: Int) {
+        Class.forName("com.mysql.cj.jdbc.Driver")
+        val connection = DriverManager.getConnection("jdbc:mysql://$dbHost/$dbName", dbUser, dbPass)
+        val sql = "DELETE FROM Params WHERE scriptID = ?;"
+        val stmt = connection.prepareStatement(sql)
+        stmt.setInt(1, scriptID)
+        stmt.execute()
+        val sql2 = "DELETE FROM Scripts WHERE id = ?;"
+        val stmt2 = connection.prepareStatement(sql2)
+        stmt2.setInt(1, scriptID)
+        stmt2.execute()
+        connection.close()
     }
 
     fun addParameter(scriptID: Int, name: String, unit: String, type: String) {

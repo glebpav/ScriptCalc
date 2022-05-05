@@ -104,9 +104,11 @@ fun Application.configureRouting() {
                 val creatorID = user.id
                 var name = ""
                 var description = ""
+                var type = ""
                 var path = ""
                 val inputParams = mutableListOf<Param>()
                 val outputParams = mutableListOf<Param>()
+                var fileName = ""
                 var fileBytes: ByteArray = byteArrayOf()
                 val multipartData = call.receiveMultipart()
 
@@ -117,6 +119,8 @@ fun Application.configureRouting() {
                                 name = part.value
                             if (part.name == "description")
                                 description = part.value
+                            if (part.name == "type")
+                                type = part.value
                             if (part.name?.contains("inputParamsUnits") == true) {
                                 val index = part.name!!.substringAfter("[").substringBefore("]").toInt()
                                 inputParams[index].unit = part.value
@@ -136,7 +140,7 @@ fun Application.configureRouting() {
                         }
                         is PartData.FileItem -> {
                             if (part.name == "file") {
-                                val fileName = part.originalFileName as String
+                                fileName = part.originalFileName as String
                                 fileBytes = part.streamProvider().readBytes()
                             }
                         }
@@ -146,10 +150,10 @@ fun Application.configureRouting() {
 
                 if(!(File("scripts").exists()))
                     File("scripts").mkdirs()
-                path = "scripts/" + Auth.generateToken() + ".py";
+                path = "scripts/$fileName";
                 if (fileBytes.isNotEmpty()) File(path).writeBytes(fileBytes) else throw Exception("Empty script file")
 
-                val newScriptID = DbController.createFile(creatorID, name, description, path)
+                val newScriptID = DbController.createScript(creatorID, name, description, path, type)
 
                 for(param in inputParams) {
                     DbController.addParameter(newScriptID, param.paramName, param.unit, "input")
@@ -212,6 +216,20 @@ fun Application.configureRouting() {
 
                 call.respond(script)
 
+            } catch (e: Exception) {
+                call.response.status(HttpStatusCode(400, e.message.toString()))
+            }
+        }
+
+        post("script/delete") {
+            try {
+                val id = call.request.queryParameters["id"] ?: throw Exception("Empty ID")
+                val script = DbController.getScriptByID(id.toInt()) ?: throw Exception("Plugin with this id not found")
+
+                DbController.deleteScript(script.id)
+                File(script.path).delete()
+
+                call.response.status(HttpStatusCode.OK)
             } catch (e: Exception) {
                 call.response.status(HttpStatusCode(400, e.message.toString()))
             }
