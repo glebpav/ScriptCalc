@@ -361,4 +361,20 @@ input[type=file]::file-selector-button {
     inset -4px -4px 8px #ffffff;
 }
 
+.typeSwitcher {
+    height: 30px;
+    border-radius: 10px;
+    background: #e0e5ff;
+    box-shadow:  6px 6px 12px #bec3d9,
+    -6px -6px 12px #ffffff;
+}
+
+.typeSwitcherSelected {
+    height: 30px;
+    border-radius: 10px;
+    background: #e0e5ff;
+    box-shadow: inset 6px 6px 12px #bec3d9,
+    inset -6px -6px 12px #ffffff;
+}
+
 

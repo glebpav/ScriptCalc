@@ -226,6 +226,7 @@ function onTabClicked(tabId) {
         tab1.className = "rowWithSpace selectedTab";
 
         tabContent.innerHTML = addScriptFormBlock;
+        onScrTypeClicked(0);
 
     }
 
@@ -268,4 +269,31 @@ function onExeScriptClicked(scriptData) {
 
 function onReturnHome() {
     window.location.href = "/home.html";
+}
+
+function onScrTypeClicked(typeId) {
+
+    let tab0 = document.getElementById("exeScrTypeTab");
+    let tab1 = document.getElementById("serScrTypeTab");
+    let tabContent = document.getElementById("helperInfoWrapper");
+    let scriptDescHolder = document.getElementById("scriptDescriptionHolder");
+
+    if (typeId === 0) {
+
+        tab0.className = "rowWithSpace typeSwitcherSelected";
+        tab1.className = "rowWithSpace typeSwitcher";
+
+        tabContent.innerText = "Executable script appears on the home page and can operate with serviced scripts.";
+        scriptDescHolder.innerHTML = exeScriptBlock;
+
+    } else if (typeId === 1) {
+
+        tab0.className = "rowWithSpace typeSwitcher";
+        tab1.className = "rowWithSpace typeSwitcherSelected";
+
+        tabContent.innerText = "Serviced scripts are hidden from usual users. Use them to help operate executable scripts.";
+        scriptDescHolder.innerHTML = serScriptBlock;
+
+    }
+
 }
