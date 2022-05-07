@@ -14,14 +14,23 @@ function appendScriptElements(parentElement, data, type) {
 
         let scriptContainer = createElement("div", {
             class: "verticalScriptListItem",
-            style: "cursor: pointer; text-align: center; display: flex; flex-flow: row wrap; ",
+            style: "cursor: pointer; text-align: center; display: flex; flex-flow: row wrap; overflow: hidden; ",
             align: "left",
+        })
+        let scriptInfo = createElement("div", {
+            class: "rowWithSpace",
+            style: "height: 38px; width: 90%;  margin-left: 30px; margin-top: 8px; text-align:left; overflow: hidden;",
+            onclick: (type === "exe") ? "onExeScriptClicked(" + JSON.stringify(data[i]) + ")" : "",
         })
         let scriptName = createElement("p", {
             class: "rowWithSpace",
-            style: "height: 38px; width: 90%; text-align: left; margin-left: 30px; margin-top: 8px;",
+            style: "text-align: left; max-width: 65%; margin: 0;",
             innerText: "- " + data[i].name,
-            onclick: (type === "exe") ? "onExeScriptClicked(" + JSON.stringify(data[i]) + ")" : "",
+        })
+        let fileName = createElement("p", {
+            class: "rowWithSpace",
+            style: "text-align: left; max-width: 30%; margin: 0; font-style: italic; color: #888888;",
+            innerText:  "  " + (!data[i].path ? "empty path" : data[i].path.substr(8)),
         })
         let delIcon = createElement("span", {
             style: "width: 6%; margin-top: 8px; ",
@@ -30,10 +39,13 @@ function appendScriptElements(parentElement, data, type) {
             onclick: "onDeleteScript("+ data[i].id +")"
         });
 
-        scriptContainer.appendChild(scriptName);
+        scriptInfo.appendChild(scriptName);
+        scriptInfo.appendChild(fileName);
+        scriptContainer.appendChild(scriptInfo);
         scriptContainer.appendChild(delIcon);
         parentElement.appendChild(scriptContainer);
     }
+
 }
 
 function showScripts(data, type) {
@@ -195,7 +207,7 @@ function onMakeScript() {
         processData: false,
         data: formData,
         success: function (data) {
-            // window.location = "home.html"
+            window.location = "home.html"
         },
         error: function (xhr, status, message) {
             alert(message);
