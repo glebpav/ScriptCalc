@@ -18,8 +18,6 @@ function loadScriptData() {
 
 }
 
-
-
 function printScript(scriptData) {
 
     document.getElementById("scriptNameID").innerText = scriptData.name;
@@ -34,6 +32,7 @@ function printScript(scriptData) {
         paramsPlaceHolder.appendChild(getInputParamElement(scriptData.inputParams[i]));
     }
 
+    printOutputParams(scriptData.outputParams, "", true);
 }
 
 function getInputParamElement(data) {
@@ -119,14 +118,35 @@ function getOutputParamElement(param) {
     return paramHolderEl
 }
 
-function printOutputParams(inputData, inputInfo) {
+function printOutputParams(inputData, inputInfo, isEmptyFields = false) {
 
-    if (inputData.length === 0) {
+    if (inputData.length === 0 && isEmptyFields === 0) {
         alert("Error: empty response!");
         return
     }
 
     let rootPlaceHolder = document.getElementById("allOutputParams")
+
+    if (isEmptyFields === true){
+
+        let emptyFlagEl = createElement("input", {
+            id: "isEmptyFlag",
+            value: "true",
+            type: "hidden"
+        });
+        rootPlaceHolder.appendChild(emptyFlagEl);
+
+    } else {
+
+        let emptyFlagEl = document.getElementById("isEmptyFlag");
+        if (emptyFlagEl !== null) {
+
+            rootPlaceHolder.innerHTML = "";
+            alreadyCalculated = false;
+
+        }
+
+    }
 
     if (!alreadyCalculated) {
 
@@ -136,20 +156,17 @@ function printOutputParams(inputData, inputInfo) {
             innerText: "Output params",
             class: "subHeaders"
         });
-
         rootPlaceHolder.appendChild(titleOutput)
 
     }
 
-    alreadyCalculated = true
+    alreadyCalculated = true;
 
     let paramInputEl = createElement("p", {innerText: inputInfo});
-    // rootPlaceHolder.appendChild(paramInputEl)
     insertAfter(document.getElementById("titleOutput"), paramInputEl);
 
     let bufDiv = createElement("div")
     for (let i = 0; i < inputData.length; i++) {
-        // rootPlaceHolder.appendChild(getOutputParamElement(inputData[i]))
         bufDiv.appendChild(getOutputParamElement(inputData[i]));
     }
 
@@ -163,9 +180,9 @@ function setTabSelected(id) {
     let tabs = document.getElementById("tabsWrapper").getElementsByClassName("rowWithSpace");
 
     for (let i = 0; i < tabs.length; i++) {
-        console.log(tabs[i])
+        // console.log(tabs[i])
         tabs[i].className = "rowWithSpace tab";
-        console.log(tabs[i])
+        // console.log(tabs[i])
     }
 
     document.getElementById("tab" + id).className = "rowWithSpace selectedTab";

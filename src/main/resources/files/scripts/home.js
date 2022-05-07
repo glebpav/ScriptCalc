@@ -1,7 +1,7 @@
 function setTitle() {
 
     let user = loadUser();
-    let greetingLabel = "";
+    let greetingLabel;
     if (user != null)
         greetingLabel = "Hello, " + loadUser().name;
     else
@@ -68,12 +68,12 @@ function printScripts(scriptsArray) {
 
 }
 
-function onAddNewScript() {
-    window.location.href = "/addScript.html";
-}
-
 function goToScript(scriptID) {
     saveScriptId(scriptID);
     setTabSelected(scriptID);
     loadScriptData();
+}
+
+function onAddNewScript() {
+    window.location.href = "/addScript.html";
 }

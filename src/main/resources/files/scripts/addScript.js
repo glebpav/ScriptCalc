@@ -195,7 +195,7 @@ function onMakeScript() {
         processData: false,
         data: formData,
         success: function (data) {
-            window.location = "home.html"
+            // window.location = "home.html"
         },
         error: function (xhr, status, message) {
             alert(message);
