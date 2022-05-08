@@ -25,7 +25,7 @@ function printScript(scriptData) {
 
     let paramsPlaceHolder = document.getElementById("allInputsParams");
     paramsPlaceHolder.innerHTML = "";
-    document.getElementById("allOutputParams").innerHTML= "";
+    document.getElementById("allOutputParams").innerHTML = "";
     alreadyCalculated = false;
 
     for (let i = 0; i < scriptData.inputParams.length; i++) {
@@ -127,7 +127,7 @@ function printOutputParams(inputData, inputInfo, isEmptyFields = false) {
 
     let rootPlaceHolder = document.getElementById("allOutputParams")
 
-    if (isEmptyFields === true){
+    if (isEmptyFields === true) {
 
         let emptyFlagEl = createElement("input", {
             id: "isEmptyFlag",
@@ -208,8 +208,8 @@ function btnCalculate() {
 
         inputArray.push(param);
 
-        inputsStr += String(param.paramName) + " = " +  String(param.value);
-        if (i !== inputs.length-1) inputsStr += "; "
+        inputsStr += String(param.paramName) + " = " + String(param.value);
+        if (i !== inputs.length - 1) inputsStr += "; "
 
         if (param.value === "") {
             alert("Inputs can't be empty")
@@ -228,10 +228,11 @@ function btnCalculate() {
             'scriptId': id,
             'scriptInputParams': JSON.stringify(inputArray)
         },
+        error: function (xhr, status, message) {
+            alert("ERROR! " + message);
+        },
         success: function (data) {
-
             printOutputParams(JSON.parse(data), inputsStr);
-
         }
     });
 

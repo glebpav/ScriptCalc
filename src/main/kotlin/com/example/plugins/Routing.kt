@@ -88,7 +88,7 @@ fun Application.configureRouting() {
         }
 
         post("auth/logout") {
-            val token = call.request.cookies["token"].toString()
+            val token = call.request.queryParameters["token"] ?: throw Exception("You are not logged in")
             val user = Auth.getUserByToken(token)
             if (user != null) {
                 Auth.removeSession(token)

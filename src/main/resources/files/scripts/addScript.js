@@ -29,7 +29,7 @@ function appendScriptElements(parentElement, data, type) {
         })
         let fileName = createElement("p", {
             class: "rowWithSpace",
-            style: "text-align: left; max-width: 30%; margin: 0; font-style: italic; color: #888888;",
+            style: "text-align: left; max-width: 30%; margin: 0px 10px; font-style: italic; color: #888888;",
             innerText:  "  " + (!data[i].path ? "empty path" : data[i].path.substr(8)),
         })
         let delIcon = createElement("span", {

@@ -2,7 +2,7 @@ function setTitle() {
 
     let user = loadUser();
     let greetingLabel;
-    if (user != null)
+    if (user != null && loadUser().name)
         greetingLabel = "Hello, " + loadUser().name;
     else
        greetingLabel = "Hello, dear engineer";
@@ -76,4 +76,21 @@ function goToScript(scriptID) {
 
 function onAddNewScript() {
     window.location.href = "/addScript.html";
+}
+
+function onLogout() {
+    $.ajax({
+        url: '/auth/logout?token=' + loadToken(),
+        cache: false,
+        method: 'post',
+        dataType: 'html',
+        data: {},
+        error: function (xhr, status, message) {
+            alert(message);
+        },
+        success: function (data) {
+            saveUser("");
+            window.location.href = "/";
+        }
+    });
 }

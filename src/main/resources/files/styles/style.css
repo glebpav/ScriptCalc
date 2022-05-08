@@ -99,6 +99,7 @@ input[type=file]::file-selector-button {
     background: #e0e5ff;
     box-shadow: 4px 4px 8px #bec3d9,
     -4px -4px 8px #ffffff;
+    cursor: pointer;
 }
 
 .enterText {
@@ -165,6 +166,7 @@ input[type=file]::file-selector-button {
     background: #ffb8cd;
     box-shadow: 4px 4px 8px #d99cae,
     -4px -4px 8px #ffd4ec;
+    cursor: pointer;
 }
 
 .addBtn {
@@ -179,6 +181,7 @@ input[type=file]::file-selector-button {
     background: #e0e5ff;
     box-shadow: 4px 4px 8px #bec3d9,
     -4px -4px 8px #ffffff;
+    cursor: pointer;
 }
 
 .button {
@@ -230,6 +233,7 @@ input[type=file]::file-selector-button {
     border: none;
     box-shadow: 0 0 20px #eee;
     border-radius: 10px;
+    cursor: pointer;
 }
 
 .btn-grad:hover {
@@ -338,8 +342,22 @@ input[type=file]::file-selector-button {
     margin-left: 40px;
     margin-top: 25px;
     left: 0;
+    cursor: pointer;
 }
-
+.absoluteExitButton {
+    position: absolute;
+    margin-right: 80px;
+    margin-top: 40px;
+    right: 0;
+    cursor: pointer;
+}
+.absoluteSettingsButton {
+    position: absolute;
+    margin-left: 80px;
+    margin-top: 40px;
+    left: 0;
+    cursor: pointer;
+}
 
 .wrapper {
     display: grid;
@@ -367,6 +385,7 @@ input[type=file]::file-selector-button {
     background: #e0e5ff;
     box-shadow:  6px 6px 12px #bec3d9,
     -6px -6px 12px #ffffff;
+    cursor: pointer;
 }
 
 .typeSwitcherSelected {
