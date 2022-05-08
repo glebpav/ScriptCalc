@@ -124,7 +124,7 @@ function getAvailableScriptViewer() {
     });
     let tipToExeScripts = createElement("p", {
         style: "text-align: left",
-        innerText: "Tip: you can press any exe script to refactor its settings"
+        innerText: "Tip: you can press any exe script to see its settings"
     });
 
     placeHolder.appendChild(exeScriptsHeader);
@@ -252,11 +252,15 @@ function onExeScriptClicked(scriptData) {
     document.getElementById("scriptName").value = scriptData.name;
     document.getElementById("scriptDescription").value = scriptData.description;
 
-    console.log(scriptData.inputParams);
-    console.log(scriptData.outputParams);
+    // console.log(scriptData.inputParams);
+    // console.log(scriptData.outputParams);
 
     countOfInputParams = 0;
     countOfOutputParams = 0;
+
+    document.getElementById("fileBlock").style.display = "none";
+    document.getElementById("inputParamsButtons").style.display = "none";
+    document.getElementById("outputParamsButtons").style.display = "none";
 
     document.getElementById("inputParams").innerHTML = "";
     for (let i = 0; i < scriptData.inputParams.length; i++) {
@@ -275,7 +279,6 @@ function onExeScriptClicked(scriptData) {
             scriptData.outputParams[i].unit
         );
     }
-
 
 }
 

@@ -1,40 +1,51 @@
 let addScriptFormBlock = `
-            <form onsubmit="onMakeScript(); return false;" enctype="multipart/form-data">
-            
-            <p class="title">Type of the Script</p>
-
-            <div id="IdScriptHolder" style="width: 71%; margin: 0 auto;">
-
-            <div id="scriptTypeWrapper" class="headersRow"  >
-
+        <form onsubmit="onMakeScript(); return false;" enctype="multipart/form-data">
+        
+                <p class="title">Type of the Script</p>
+                
+                <div id="IdScriptHolder" style="width: 71%; margin: 0 auto;">
+                
+                <div id="scriptTypeWrapper" class="headersRow"  >
+                
                 <div class="rowWithSpace typeSwitcher" style="width: 49%; margin-right: 5px;" onclick="onScrTypeClicked(0)"
-                     id="exeScrTypeTab">
-                    <p style="margin-top: 5px;">Executable</p>
+                    id="exeScrTypeTab">
+                <p style="margin-top: 5px;">Executable</p>
                 </div>
-
+                
                 <div class="rowWithSpace typeSwitcher" style="width: 49%; margin-left: 5px;" onclick="onScrTypeClicked(1)"
-                     id="serScrTypeTab">
-                    <p style="margin-top: 5px;">Serviced</p>
+                    id="serScrTypeTab">
+                <p style="margin-top: 5px;">Serviced</p>
                 </div>
+                
+                </div>
+                
+                <div id="helperInfoWrapper" class="container" style="margin-top: 10px; font-size: 14px;">
+                
+                </div>
+                
+                </div>
+                
+                <div id="scriptDescriptionHolder">
+                
+                </div>
+                
+                <div id="fileBlock" >
+                
+                    <p class="titles">Attach script.py</p>
+                    <input type='file' name="file" id="getFile">
+                
+                <br>
+                
+                <input type="submit" class="btn-grad" value="Create script">
 
-            </div>
-
-            <div id="helperInfoWrapper" class="container" style="margin-top: 10px; font-size: 14px;">
-
-            </div>
-
-        </div>
-
-            <div id="scriptDescriptionHolder">
-
-            </div>
-
+                </div>                            
+        
         </form>
         `;
 
 let exeScriptBlock = `
-        <input type="hidden" name="type" value="executable">
-        <input id="scriptName" class="enterText" style="margin-top: 40px;" name="name" placeholder="Name of your script">
+        <input type="hidden" name="type" style="font-size: 14px;" value="executable">
+        <input id="scriptName" class="enterText" style="margin-top: 40px; font-size: 14px;" name="name" placeholder="Name of your script">
         <textarea id="scriptDescription" name="description" class="enterText"
               placeholder="Put here your wonderful description"></textarea>
         
@@ -46,13 +57,15 @@ let exeScriptBlock = `
         </div>
         </div>
         
-        <hr style="width: 160px; background: #e0e5ff"/>
+        <div id="inputParamsButtons">
         
-        <button id="btnAddMoreInpParams" class="addBtn" onclick="onAddMoreParams(&quot;inp&quot;); return false;">Add more
-        </button>
-        <button id="btnDelLastInpParams" class="delBtn" onclick="onDelLastParam(&quot;inp&quot;); return false;">del
-        </button>
+                <hr style="width: 160px; background: #e0e5ff"/>
         
+                <button id="btnAddMoreInpParams" class="addBtn" onclick="onAddMoreParams(&quot;inp&quot;); return false;">Add more
+                </button>
+                <button id="btnDelLastInpParams" class="delBtn" onclick="onDelLastParam(&quot;inp&quot;); return false;">del
+                </button>
+        </div>
         <p class="titles" align="middle" style="margin-top: 30px;">Output params</p>
         
         <div id="outputParams">
@@ -62,20 +75,17 @@ let exeScriptBlock = `
         </div>
         </div>
         
-        <hr style="width: 160px;  background: #e0e5ff"/>
+        <div id="outputParamsButtons">
         
-        <button id="btnAddMoreOutParams" class="addBtn" onclick="onAddMoreParams(&quot;out&quot;); return false;">Add more
-        </button>
-        <button id="btnDelLastOutParams" class="delBtn" onclick="onDelLastParam(&quot;out&quot;); return false;">del
-        </button>
+                <hr style="width: 160px;  background: #e0e5ff"/>
+                
+                <button id="btnAddMoreOutParams" class="addBtn" onclick="onAddMoreParams(&quot;out&quot;); return false;">Add more
+                </button>
+                <button id="btnDelLastOutParams" class="delBtn" onclick="onDelLastParam(&quot;out&quot;); return false;">del
+                </button>
+        
+        </div>
         <br>
-        
-        <p class="titles">Attach script.py</p>
-        <input type='file' name="file" id="getFile">
-        
-        <br>
-        
-        <input type="submit" class="btn-grad" value="Create script">
 `
 
 let serScriptBlock = `
@@ -83,12 +93,4 @@ let serScriptBlock = `
         <input id="scriptName" class="enterText" style="margin-top: 40px;" name="name" placeholder="Name of your script">
         <textarea id="scriptDescription" name="description" class="enterText"
         placeholder="Put here your wonderful description"></textarea>
-        
-        
-        <p class="titles">Attach script.py</p>
-        <input type='file' name="file" id="getFile">
-        
-        <br>
-        
-        <input type="submit" class="btn-grad" value="Create script">
 `
