@@ -66,14 +66,14 @@ body {
     background: #e0e5ff;
     box-shadow: inset 19px 19px 39px #bec3d9,
     inset -19px -19px 39px #ffffff;
-    max-width: 20%;
+    max-width: 30%;
     z-index: 2;
     flex: auto;
 }
 
 .selectedTab {
     user-select: none;
-    max-width: 20%;
+    max-width: 30%;
     cursor: pointer;
     flex: auto;
     border-width: 2px;
