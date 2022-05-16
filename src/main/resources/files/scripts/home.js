@@ -32,6 +32,7 @@ function loadAllScripts() {
 
 }
 
+
 function printScripts(scriptsArray) {
 
     let cardDiv;

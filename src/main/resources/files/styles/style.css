@@ -156,6 +156,16 @@ input[type=file]::file-selector-button {
     display: inline-block;
 }
 
+.middleWidthBlock {
+    width: 200px;
+    display: inline-block;
+}
+
+.wideBlock {
+    width: 300px;
+    display: inline-block;
+}
+
 .delBtn {
     width: 50px;
     padding: 5px;
@@ -170,7 +180,7 @@ input[type=file]::file-selector-button {
 }
 
 .addBtn {
-    width: 110px;
+    width: 210px;
     padding: 5px;
     border: 0px;
     margin-top: 12px;
@@ -219,6 +229,7 @@ input[type=file]::file-selector-button {
 .btn-grad {
     background-image: linear-gradient(to right, #f64f59, #c471ed, #12c2e9)
 }
+
 
 .btn-grad {
     width: 150px;

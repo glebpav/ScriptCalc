@@ -59,6 +59,7 @@ let exeScriptBlock = `
         
         <div id="inputParamsButtons">
         
+        
                 <hr style="width: 160px; background: #e0e5ff"/>
         
                 <button id="btnAddMoreInpParams" class="addBtn" onclick="onAddMoreParams(&quot;inp&quot;); return false;">Add more

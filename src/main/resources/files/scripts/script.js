@@ -18,6 +18,7 @@ function loadScriptData() {
 
 }
 
+
 function printScript(scriptData) {
 
     document.getElementById("scriptNameID").innerText = scriptData.name;
