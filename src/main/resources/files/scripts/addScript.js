@@ -147,11 +147,11 @@ function onAddMoreParams(type, name = "", units = "") {
     let newDiv = createElement("div", {class: "row"});
     let newInput = createElement("input", {
         name: namePrefix + "Params[" + rowId + "]",
-        class: "block enterText",
+        class: "middleWidthBlock enterText",
         placeHolder: "Param"
     });
     let newInputUnits = createElement("input", {
-        class: "block enterText",
+        class: "middleWidthBlock enterText",
         placeHolder: "Units",
         name: namePrefix + "ParamsUnits[" + rowId + "]",
         style: "width: 40px; margin-left: 5px"

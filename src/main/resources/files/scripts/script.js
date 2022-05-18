@@ -47,7 +47,7 @@ function getInputParamElement(data) {
     });
     let pName = createElement('p', {
         style: 'text-align: right',
-        class: 'block',
+        class: 'wideBlock',
         innerText: data.paramName
     });
     let pDel = createElement('p', {
@@ -56,13 +56,13 @@ function getInputParamElement(data) {
         innerText: ' = '
     });
     let inputValue = createElement('input', {
-        style: 'width: 100px',
-        class: 'block enterTextDown'
+        // style: 'width: 100px',
+        class: 'middleWidthBlock enterTextDown'
     });
     let pUnit = createElement('div', {
         style: 'margin-left: 10px; text-align: left',
         innerText: data.unit,
-        class: 'block'
+        class: 'wideBlock'
     });
 
     mainBlock.appendChild(pName);
@@ -88,7 +88,7 @@ function getOutputParamElement(param) {
 
     paramNameEl = createElement("p", {
         style: "text-align: right",
-        class: "block",
+        class: "wideBlock",
         innerText: param.paramName
     });
 
@@ -99,15 +99,15 @@ function getOutputParamElement(param) {
     });
 
     paramValueEl = createElement("input", {
-        style: "width: 100px",
-        class: "block enterTextDown",
+        // style: "width: 100px",
+        class: "middleWidthBlock enterTextDown",
         readOnly: true,
         value: param.value
     });
 
     paramUnitsEl = createElement("p", {
         style: "text-align: left; margin-left: 10px",
-        class: "block",
+        class: "wideBlock",
         innerText: param.unit
     });
 

@@ -52,15 +52,15 @@ let exeScriptBlock = `
         <p class="titles">Input params</p>
         <div id="inputParams">
         <div class="row" id="row0">
-            <input class="block enterText" name="inputParams[0]" placeholder="Param"/>
-            <input class="block enterText" name="inputParamsUnits[0]" style="width: 40px" placeholder="Units"/>
+            <input class="middleWidthBlock enterText" name="inputParams[0]" placeholder="Param"/>
+            <input class="middleWidthBlock enterText" name="inputParamsUnits[0]" style="width: 40px" placeholder="Units"/>
         </div>
         </div>
         
         <div id="inputParamsButtons">
         
         
-                <hr style="width: 160px; background: #e0e5ff"/>
+                <hr style="width: 250px; background: #e0e5ff"/>
         
                 <button id="btnAddMoreInpParams" class="addBtn" onclick="onAddMoreParams(&quot;inp&quot;); return false;">Add more
                 </button>
@@ -71,14 +71,14 @@ let exeScriptBlock = `
         
         <div id="outputParams">
         <div class="row" id="row2">
-            <input class="block enterText" name="outputParams[0]" placeholder="Param"/>
-            <input class="block enterText" name="outputParamsUnits[0]" style="width: 40px" placeholder="Units"/>
+            <input class="middleWidthBlock enterText" name="outputParams[0]" placeholder="Param"/>
+            <input class="middleWidthBlock enterText" name="outputParamsUnits[0]" style="width: 40px" placeholder="Units"/>
         </div>
         </div>
         
         <div id="outputParamsButtons">
         
-                <hr style="width: 160px;  background: #e0e5ff"/>
+                <hr style="width: 250px;  background: #e0e5ff"/>
                 
                 <button id="btnAddMoreOutParams" class="addBtn" onclick="onAddMoreParams(&quot;out&quot;); return false;">Add more
                 </button>
